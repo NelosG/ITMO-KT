@@ -1,0 +1,7 @@
+package expression.parser;
+
+
+public enum Token {
+    ADD, CONST, NEGATIVE, SUBTRACT, MULTIPLY, DIVIDE, VARIABLE, ERROR, BEGIN,
+    OPEN_BRAKE, CLOSE_BRAKE, SHIFT_LEFT, SHIFT_RIGHT, END, LOG2, POW2
+}
