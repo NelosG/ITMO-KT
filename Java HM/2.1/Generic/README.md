@@ -8,8 +8,8 @@
 | -d |	double |
 | -bi |	[BigInteger](https://docs.oracle.com/javase/8/docs/api/java/math/BigInteger.html) |
 
-	- Вторым аргументом командной строки программа должна принимать выражение для вычисления.
-	- Реализация не должна содержать [непроверяемых преобразований типов](https://docs.oracle.com/javase/specs/jls/se8/html/jls-5.html#jls-5.1.9).
-	- Реализация не должна использовать аннотацию [@SuppressWarnings](https://docs.oracle.com/javase/specs/jls/se8/html/jls-9.html#jls-9.6.4.5).
++ Вторым аргументом командной строки программа должна принимать выражение для вычисления.
++ Реализация не должна содержать [непроверяемых преобразований типов](https://docs.oracle.com/javase/specs/jls/se8/html/jls-5.html#jls-5.1.9).
++ Реализация не должна использовать аннотацию [@SuppressWarnings](https://docs.oracle.com/javase/specs/jls/se8/html/jls-9.html#jls9.6.4.5).
 
 2. При выполнении задания следует обратить внимание на легкость добавления новых типов и операциий.
