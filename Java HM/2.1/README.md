@@ -1,3 +1,5 @@
+Слегка [обрезанная реализация](https://github.com/NelosG/-NGit/tree/master/Java%20HM/2.1/Generic), но с Generic.
+
 ## Выражения
 1. Разработайте классы Const, Variable, Add, Subtract, Multiply, Divide для вычисления выражений с одной переменной.
 
