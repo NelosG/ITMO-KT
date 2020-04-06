@@ -105,30 +105,6 @@ int qsit(struct Person *a, long size) {
     return 0;
 }
 
-//int qs(struct Person *arr, int first, int last, int glub) { //вроде тоже работает
-//    if (first < last) {
-//        if (glub < 10000) {
-//            int left = first, right = last;
-//            struct Person middle = arr[(left + right) / 2];
-//            while (left <= right) {
-//                while (compare(middle, arr[left])) left++;
-//                while (compare(arr[right], middle)) right--;
-//                if (left <= right) {
-//                    struct Person tmp = arr[left];
-//                    arr[left] = arr[right];
-//                    arr[right] = tmp;
-//                    left++;
-//                    right--;
-//                }
-//            }
-//            qs(arr, first, right, glub + 1);
-//            qs(arr, left, last, glub + 1);
-//        } else {                                        //если большая глубина рекурсии спрыгиваем на итеративную реализацию
-//            return qsit(arr, last - first + 1);
-//        }
-//    }
-//}
-
 int main(int argc, char **argv) {
     if (argc < 2) {
         printf("\nInput file name not passed\n");
