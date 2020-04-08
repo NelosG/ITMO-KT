@@ -6,4 +6,6 @@
 
 - [Лабы по ЛинАлу на Python](https://github.com/NelosG/-NGit/tree/master/Python%20LAB)
 
+- [Лабы на С](https://github.com/NelosG/-NGit/tree/master/C%20LAB)
+
 - [Эксперементы с нейронками](https://github.com/NelosG/-NGit/tree/master/Neuro)
