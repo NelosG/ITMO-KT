@@ -3,78 +3,24 @@
 function Unary(exp) {
     this.exp = exp;
 }
-
-Unary.prototype.toString = function (x, y, z) {
-    return this.exp.toString();
+Unary.prototype.evaluate = function (x, y, z) {
+    return this.calc(x, y, z);
+}
+Unary.prototype.toString = function () {
+    return this.exp.toString() + (this.char === undefined ? "" : " " + this.char);
 };
 Unary.prototype.prefix = function (x, y, z) {
-    return this.exp.toString();
+    return(this.char === undefined ? this.exp.prefix() : "(" + this.char + " " + this.exp.prefix() + ")");
 };
-
-function Const(x) {
-    Unary.call(this, x);
+function Uop(calc, char) {
+    function Operation(first) {
+        Unary.call(this, first);
+    }
+    Operation.prototype = Object.create(Unary.prototype);
+    Operation.prototype.char = char;
+    Operation.prototype.calc = calc;
+    return Operation;
 }
-
-Const.prototype = Object.create(Unary.prototype);
-Const.prototype.evaluate = function (x, y, z) {
-    return this.exp;
-};
-
-function Negate(x) {
-    Unary.call(this, x);
-}
-
-Negate.prototype = Object.create(Unary.prototype);
-Negate.prototype.toString = function (x, y, z) {
-    return this.exp.toString() + " negate";
-};
-Negate.prototype.prefix = function (x, y, z) {
-    return "(negate " + this.exp.prefix() + ")";
-};
-Negate.prototype.evaluate = function (x, y, z) {
-    return this.exp.evaluate(x, y, z) * -1;
-};
-
-function ArcTan(x) {
-    Unary.call(this, x);
-}
-
-ArcTan.prototype = Object.create(Unary.prototype);
-ArcTan.prototype.toString = function (x, y, z) {
-    return this.exp.toString() + " atan";
-};
-ArcTan.prototype.prefix = function (x, y, z) {
-    return "(atan " + this.exp.prefix() + ")";
-};
-ArcTan.prototype.evaluate = function (x, y, z) {
-    return Math.atan(this.exp.evaluate(x, y, z));
-};
-
-function Exp(x) {
-    Unary.call(this, x);
-}
-
-Exp.prototype = Object.create(Unary.prototype);
-Exp.prototype.toString = function (x, y, z) {
-    return this.exp.toString() + " exp";
-};
-Exp.prototype.prefix = function (x, y, z) {
-    return "(exp " + this.exp.prefix() + ")";
-};
-Exp.prototype.evaluate = function (x, y, z) {
-    return Math.exp(this.exp.evaluate(x, y, z));
-};
-
-function Variable(name) {
-    Unary.call(this, name);
-}
-
-Variable.prototype = Object.create(Unary.prototype);
-Variable.prototype.evaluate = function (x, y, z) {
-    if (this.exp === "x") return x;
-    if (this.exp === "y") return y;
-    return z;
-};
 
 function Binary(first, second) {
     this.first = first;
@@ -91,37 +37,32 @@ Binary.prototype.prefix = function () {
     return "(" + this.char + " " + this.first.prefix() + " " + this.second.prefix() + ")";
 };
 
-function Add(first, second) {
-    Binary.call(this, first, second);
+
+function Bop(calc, char) {
+    function Operation(first, second) {
+        Binary.call(this, first, second);
+    }
+    Operation.prototype = Object.create(Binary.prototype);
+    Operation.prototype.char = char;
+    Operation.prototype.calc = calc;
+    return Operation;
 }
 
-Add.prototype = Object.create(Binary.prototype);
-Add.prototype.char = "+";
-Add.prototype.calc = (a, b) => (a + b);
+const variables = ["x", "y", "z"];
+const Variable = Uop(function (...values) {return values[variables.indexOf(this.exp)]});
+const Const = Uop(function (x, y, z) {return this.exp;});
+const Negate = Uop(function (x, y, z) {return this.exp.evaluate(x, y, z) * -1;}, "negate");
+Const.prototype.prefix = function () {return this.exp.toString();}
+Variable.prototype.prefix = function () {return this.exp.toString();}
 
-function Subtract(first, second) {
-    Binary.call(this, first, second);
-}
 
-Subtract.prototype = Object.create(Binary.prototype);
-Subtract.prototype.char = "-";
-Subtract.prototype.calc = (a, b) => (a - b);
+const ArcTan = Uop(function (x, y, z) {return Math.atan(this.exp.evaluate(x, y, z));}, "atan");
+const Exp = Uop(function (x, y, z) {return Math.exp(this.exp.evaluate(x, y, z));} , "exp");
 
-function Multiply(first, second) {
-    Binary.call(this, first, second);
-}
-
-Multiply.prototype = Object.create(Binary.prototype);
-Multiply.prototype.char = "*";
-Multiply.prototype.calc = (a, b) => (a * b);
-
-function Divide(first, second) {
-    Binary.call(this, first, second);
-}
-
-Divide.prototype = Object.create(Binary.prototype);
-Divide.prototype.char = "/";
-Divide.prototype.calc = (a, b) => (a / b);
+const Add = Bop((a, b) => (a + b), "+");
+const Subtract = Bop((a, b) => (a - b), "-");
+const Multiply = Bop((a, b) => (a * b), "*");
+const Divide = Bop((a, b) => (a / b), "/");
 
 
 let quantity = new Map([
@@ -148,7 +89,6 @@ let operations = new Map([
 
 function parsePrefix(string) {
     let pos = 0;
-
     function parser(balance) {
         let op = "empty";
         let args = [];
@@ -196,6 +136,9 @@ function parsePrefix(string) {
 };
 
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////
 function Min3(first, middle, last) {
     this.first = first;
     this.middle = middle;
