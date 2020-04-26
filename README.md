@@ -1,5 +1,9 @@
 ## -NGit
 
+- [Лабы по Алгоритмам и структурам данных](https://github.com/NelosG/-NGit/tree/master/Algorithms)
+
+- [Дз по Clojure](https://github.com/NelosG/-NGit/tree/master/Clojure%20HM)
+
 - [Дз по Java](https://github.com/NelosG/-NGit/tree/master/Java%20HM)
 
 - [Дз по JavaScript](https://github.com/NelosG/-NGit/tree/master/Js%20HM)
