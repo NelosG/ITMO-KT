@@ -89,6 +89,7 @@ let operations = new Map([
 
 function parsePrefix(string) {
     let pos = 0;
+
     function parser(balance) {
         let op = "empty";
         let args = [];
@@ -128,7 +129,10 @@ function parsePrefix(string) {
     };
 
     function wrap(op, ...args) {
-        if (args.length !== quantity.get(op)) throw new Error("Error in the number of arguments");
+        if (args.length !== quantity.get(op)) {
+            if (quantity.get(op) > 1) throw new Error("Error in the number of arguments in BinOp  in \"" + pos +"\"");
+            throw new Error("Error in the number of arguments in UnaryOp  in \"" + pos + "\"");
+        }
         return new (operations.get(op))(...args);
     };
 

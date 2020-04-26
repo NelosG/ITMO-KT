@@ -1,0 +1,28 @@
+(defn operation [f & vectors]
+  (apply mapv f vectors))
+(def v+ (partial operation +))
+(def v- (partial operation -))
+(def v* (partial operation *))
+(def vd (partial operation /))
+
+(def m+ (partial operation v+))
+(def m- (partial operation v-))
+(def m* (partial operation v*))
+(def md (partial operation vd))
+
+(def c+ (partial operation m+))
+(def c- (partial operation m-))
+(def c* (partial operation m*))
+(def cd (partial operation md))
+
+(defn scalar [a, b] (reduce + (v* a b)))
+(defn transpose [m] (apply mapv vector m))
+(defn oper [f a b] (mapv (fn [x] (f x b)) a))
+(defn v*s [v s] (oper * v s))
+(defn m*s [m s] (oper v*s m s))
+(defn m*v [m v] (oper scalar m v))
+(defn m*m [a b] (mapv (partial m*v (transpose b)) a))
+(defn vect [a b] [(- (* (nth a 1) (nth b 2)) (* (nth a 2) (nth b 1))) ;a(y) * b(z) - a(z) * b(y)
+                  (- (* (nth a 2) (nth b 0)) (* (nth a 0) (nth b 2))) ;a(z) * b(x) - a(x) * b(z)
+                  (- (* (nth a 0) (nth b 1)) (* (nth a 1) (nth b 0)))] ;a(x) * b(y) - a(y) * b(x)
+  )
