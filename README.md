@@ -1,6 +1,8 @@
 ## -NGit
 
-- [Лабы по Алгоритмам и структурам данных](https://github.com/NelosG/-NGit/tree/master/Algorithms)
+- [Лабораторные по Алгоритмам и структурам данных](https://github.com/NelosG/-NGit/tree/master/Algorithms)
+
+- [Лабораторные по дискретной математике](https://github.com/NelosG/-NGit/tree/master/Discrete%20Math)
 
 - [Дз по Clojure](https://github.com/NelosG/-NGit/tree/master/Clojure%20HM)
 
@@ -8,8 +10,8 @@
 
 - [Дз по JavaScript](https://github.com/NelosG/-NGit/tree/master/Js%20HM)
 
-- [Лабы по ЛинАлу на Python](https://github.com/NelosG/-NGit/tree/master/Python%20LAB)
+- [Лабораторные по Линейной Алгебре на Python](https://github.com/NelosG/-NGit/tree/master/Python%20LAB)
 
-- [Лабы на С](https://github.com/NelosG/-NGit/tree/master/C%20LAB)
+- [Лабораторные по С](https://github.com/NelosG/-NGit/tree/master/C%20LAB)
 
 - [Эксперементы с нейронками](https://github.com/NelosG/-NGit/tree/master/Neuro)
