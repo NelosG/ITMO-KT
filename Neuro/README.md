@@ -1,2 +1,0 @@
-- [Cuda](https://github.com/NelosG/-NGit/tree/master/Neuro/Cuda)
-- [First try neuro](https://github.com/NelosG/-NGit/tree/master/Neuro/FirtsTry)
