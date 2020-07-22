@@ -13,5 +13,3 @@
 - [Лабораторные по Линейной Алгебре на Python](https://github.com/NelosG/-NGit/tree/master/Python%20LAB)
 
 - [Лабораторные по С](https://github.com/NelosG/-NGit/tree/master/C%20LAB)
-
-- [Эксперементы с нейронками](https://github.com/NelosG/-NGit/tree/master/Neuro)
