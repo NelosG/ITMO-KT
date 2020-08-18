@@ -10,6 +10,6 @@
 
 - [Дз по JavaScript](https://github.com/NelosG/-NGit/tree/master/Js%20HM)
 
-- [Лабораторные по Линейной Алгебре на Python](https://github.com/NelosG/-NGit/tree/master/Python%20LAB)
+- [Лабораторные по Линейной Алгебре на Python](https://github.com/NelosG/ITMO-KT-first-year/tree/master/LAB%20on%20Python)
 
 - [Лабораторные по С](https://github.com/NelosG/-NGit/tree/master/C%20LAB)
