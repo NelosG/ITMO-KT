@@ -150,7 +150,7 @@ int main(int argc, char **argv) {
         size++;
     }
     fclose(in);
-    if (qsit(arr, size) < 0) { //вдруг память выделить не получиться
+    if (qsit(arr, size) < 0) {
         free(arr);
         printf("Failed to allocate memory");
         return 4;

@@ -345,8 +345,6 @@ int main(int argc, char **argv) {
         else if (operation == "!=") out << (first != second ? "true" : "false");
         else printf("Error: operation not recognized");
     }
-//    end = clock();
-//    printf("\n%6.0ld ms", 1000 * (end - start) / CLK_TCK);
     in.close();
     out.close();
     return 0;
