@@ -103,9 +103,6 @@ public class Astrograd {
         public boolean hasNextLine() throws IOException {
             char c;
             c = nextChar();
-            if (c == '\n') {
-
-            }
             pos--;
             return !EOF;
         }
