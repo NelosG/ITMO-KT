@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Implementation-Vendor: NelosG
+Main-Class: info.kgeorgiy.ja.pushkarev.implementor.Implementor
+Class-Path: ../../../java-advanced-2021/artifacts/info.kgeorgiy.java.advanced.implementor.jar

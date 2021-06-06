@@ -1,0 +1,9 @@
+module info.kgeorgiy.ja.pushkarev.implementor {
+    requires java.compiler;
+    requires info.kgeorgiy.java.advanced.implementor;
+
+    provides info.kgeorgiy.java.advanced.implementor.JarImpler with
+            info.kgeorgiy.ja.pushkarev.implementor.Implementor;
+
+    exports info.kgeorgiy.ja.pushkarev.implementor;
+}
