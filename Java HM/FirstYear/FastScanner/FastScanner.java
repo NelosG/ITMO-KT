@@ -9,7 +9,8 @@ public class FastScanner implements AutoCloseable {
 
     private int pos;
     private int len;
-    private int BUFFER_SIZE = 300;
+    private final int NORMAL_BUFFER_SIZE = 300;
+    private int BUFFER_SIZE = NORMAL_BUFFER_SIZE;
     private int foundedNextInt;
     private int rollback = 0;
     private char[] buffer;
@@ -196,6 +197,7 @@ public class FastScanner implements AutoCloseable {
     }
 
 
+    //TODO::Bad complex function, need to fix
     private void readBuffer() throws IOException {
         if (rollback > 0) {
             if (pos >= BUFFER_SIZE - 2) {
@@ -211,7 +213,6 @@ public class FastScanner implements AutoCloseable {
                     len = is.read(buffer, prevLen, BUFFER_SIZE - prevLen);
                 }
                 len += prevLen;
-                fitSize();
                 return;
             } else {
                 System.arraycopy(buffer, BUFFER_SIZE - rollback, buffer, 0, rollback);
@@ -226,13 +227,10 @@ public class FastScanner implements AutoCloseable {
         }
         len += rollback;
         pos = rollback;
-        fitSize();
-    }
 
-    private void fitSize(){
-        if(len + 10 < BUFFER_SIZE) {
+        if(len < BUFFER_SIZE / 2) {
             int prevBuffSize = BUFFER_SIZE;
-            BUFFER_SIZE = Math.max(len + 15, 300);
+            BUFFER_SIZE = Math.max(len, NORMAL_BUFFER_SIZE);
             if(prevBuffSize != BUFFER_SIZE) {
                 char[] tempBuffer = new char[BUFFER_SIZE];
                 System.arraycopy(buffer, 0, tempBuffer, 0, len);
@@ -250,6 +248,7 @@ public class FastScanner implements AutoCloseable {
                 --rollback;
                 break;
             }
+            --rollback;
         }
     }
 }
