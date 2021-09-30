@@ -1,218 +1,255 @@
 import java.io.*;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
+
 public class FastScanner implements AutoCloseable {
 
-	
-	private int pos, len;
-	private char[] buffer;
-	private boolean EOF = false;
-	private InputStreamReader is;
 
-	public FastScanner(InputStream in) {
-		is = new InputStreamReader(in, StandardCharsets.UTF_8);
-		
-	}
+    private int pos;
+    private int len;
+    private int BUFFER_SIZE = 300;
+    private int foundedNextInt;
+    private int rollback = 0;
+    private char[] buffer;
+    private boolean EOF = false;
+    private boolean closed = false;
+    private final InputStreamReader is;
 
-	
-	public FastScanner(String in) {
-		in += " ";
-		is = new InputStreamReader(new ByteArrayInputStream(in.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
-	
-	}
+    public FastScanner(InputStream in) {
+        is = new InputStreamReader(in, StandardCharsets.UTF_8);
+    }
 
-	public FastScanner(File in) throws IOException {
-		is = new InputStreamReader(new FileInputStream(in), "UTF-8");
-	
-	}
+    public FastScanner(InputStream in, Charset charset) {
+        buffer = new char[BUFFER_SIZE];
+        is = new InputStreamReader(in, charset);
+    }
 
-	   public ArrayList<String> nextArray() throws IOException {
-        ArrayList<String> a = new ArrayList<>();
-        String s = nextLine().toLowerCase();
+    public FastScanner(String in) {
+        this(in, StandardCharsets.UTF_8);
+    }
 
-        StringBuilder tmp = new StringBuilder();
+    public FastScanner(String in, Charset charset) {
+        this(new ByteArrayInputStream((in + " ").getBytes(charset)), charset);
+    }
 
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            while (Character.isLetter(c) || Character.getType(c) == Character.DASH_PUNCTUATION || c == '\'') {
-				tmp.append(c);
-				i++;
-				if (i < s.length()) {
-					c = s.charAt(i);
-				} else {
-					break;
-				}
+    public FastScanner(File in) throws IOException {
+        this(in, StandardCharsets.UTF_8);
+    }
+
+    public FastScanner(File in, Charset charset) throws IOException {
+        this(new FileInputStream(in), charset);
+    }
+
+
+    public char nextChar() throws IOException {
+        checkState();
+        if (pos >= len) {
+            readBuffer();
+        }
+        if (EOF) {
+            throw new NoSuchElementException("End of file");
+        }
+        return buffer[pos++];
+    }
+
+    private void checkState() {
+        if (closed) {
+            throw new IllegalStateException("FastScanner is closed");
+        }
+    }
+
+
+    public boolean hasNextChar() throws IOException {
+        checkState();
+        return pos < len || is.ready();
+    }
+
+
+    public boolean hasNextLine() throws IOException {
+        return hasNextChar();
+    }
+
+    public String nextLine() throws IOException {
+        StringBuilder sb = new StringBuilder();
+        char c;
+        while (hasNextChar()) {
+            c = nextChar();
+            if (c == '\n') {
+                break;
             }
-
-            if (!tmp.toString().isEmpty()) {
-                a.add(tmp.toString());
-                tmp.setLength(0);
+            if (c != '\r') {
+                sb.append(c);
             }
         }
-
-        return a;
+        return sb.toString();
     }
-	
-	public char nextChar() throws IOException {
-		if (pos >= len) {
-			readBuffer();
-		}
-	
-		return (char)buffer[pos++];
-	}
-	
-	public boolean hasNextChar() throws IOException {
-		nextChar();
-		pos--;
-		return !EOF;
-	}
-	
-	public boolean hasNextLine() throws IOException {
-		char c;
-			c = nextChar();
-		pos--;
-		return !EOF;
-	}
-	public String nextLine() throws IOException {
-		StringBuilder sb = new StringBuilder();
-		char c;
-		while (hasNextChar()) {
-			c = nextChar();
-			if ( c == '\n' ) {
-				break;
-			}	
-			if (c != '\r') {
-				sb.append(c);
-			}
-		}
-		return sb.toString();
-	}
 
-	
-	public boolean hasNextInt() throws IOException {
-		skipBlank();
-		char c;
-		boolean res = true;
-		if (!hasNextChar()) {
-			res = false;
-		} else {
-			if ( pos < len - 1) {
-				c = nextChar();
-				if (c != '\n' && c != '\r'){
-					if (!Character.isDigit(c) && c != '-' && c != '+') {
-						res = false;
-					}
-					pos--;
-				}
-			}
-		
-		
 
-		}
-		return res;
-	}
+    public boolean hasNextInt() throws IOException {
+        return hasNextIntImpl(true);
+    }
 
-	public int nextInt() throws IOException{
-		StringBuilder sb = new StringBuilder();
+    private boolean hasNextIntImpl(boolean wantRollback) throws IOException {
+        skipBlank();
         char c;
-			skipBlank();
-			if (hasNextChar() && pos < len - 1) {
-				c = nextChar();
-				if (c != '\n') {
-					pos--;
-				}
-			} else {
-				if (!hasNextChar()) {
-					throw new InputMismatchException();
-				}
-			}
-		
-        	while (hasNextChar()){
-				c = nextChar();				
-            	if (Character.isDigit(c) || c == '-' || c == '+'){
-                	sb.append(c);
-            	} else{
-                	if (!Character.isWhitespace(c)){ 
-                    	throw new InputMismatchException();
-                	}
-                	break;
-				}				
-			}
-		
-        try {
-			if (sb.length() != 0) {
-		   return Integer.parseInt(sb.toString());
-			} else {
-				throw new NumberFormatException();
-			}
-        } catch (NumberFormatException e){
-           throw new InputMismatchException();
-		}
-		
-	}
-	public boolean hasNext() throws IOException {
-		return hasNextLine();
-		
-	}
+        boolean res = true;
+        int maxSymbols = 10;
+        if (!hasNextChar()) {
+            res = false;
+        } else {
+            incRollback(wantRollback);
+            c = nextChar();
+            StringBuilder sb = new StringBuilder();
+            if (!Character.isDigit(c)) {
+                res = false;
+            }
+            if (c == '-' || c == '+') {
+                sb.append(c);
+                incRollback(wantRollback);
+                c = nextChar();
+                res = Character.isDigit(c);
+                ++maxSymbols;
+            }
 
-	public String next() throws IOException {
-		skipBlank();
-		StringBuilder sb = new StringBuilder();
-		char c;
-		while (hasNextChar()) {
-			c = nextChar();
-			if ( c == '\n' && sb.length() != 0 ) {
-				break;
-			}
-			if (c != ' ') {
-				sb.append(c);
-			} else {
-				break;
-			}
-		}
-		if( sb.length() != 0) {
-			return sb.toString();
-		} else {
-			if (EOF){
-				throw new NoSuchElementException();
-			}
-		}
-		return "";
-		
-	}
+            if (res) {
+                while (Character.isDigit(c)) {
+                    sb.append(c);
+                    if(sb.length() > maxSymbols) {
+                        res = false;
+                        break;
+                    }
+                    incRollback(wantRollback);
+                    c = nextChar();
+                }
+                pos -= rollback;
+                rollback = 0;
+                if (!Character.isWhitespace(c)) {
+                    res = false;
+                } else {
+                    try {
+                        foundedNextInt = Integer.parseInt(sb.toString());
+                    } catch (NumberFormatException e) {
+                        res = false;
+                    }
+                }
+            }
+        }
+        return res;
+    }
 
-	public void close() throws IOException {
+    public int nextInt() throws IOException {
+        skipBlank();
+        if (!hasNextChar()) {
+            throw new NoSuchElementException();
+        }
+        if (hasNextIntImpl(false)) {
+            return foundedNextInt;
+        }
+        throw new InputMismatchException();
+    }
+
+    private void incRollback(boolean wantRollback) throws IOException {
+        if (wantRollback) {
+            ++rollback;
+            if (pos >= BUFFER_SIZE - 2) {
+                readBuffer();
+            }
+        }
+    }
+
+    public boolean hasNext() throws IOException {
+        return hasNextChar();
+    }
+
+    public String next() throws IOException {
+        skipBlank();
+        StringBuilder sb = new StringBuilder();
+        char c;
+        while (hasNextChar()) {
+            incRollback(true);
+            c = nextChar();
+            if (c == '\n' && sb.length() != 0) {
+                pos -= rollback;
+                rollback = 0;
+                break;
+            }
+            --rollback;
+            if (c != ' ') {
+                sb.append(c);
+            } else {
+                break;
+            }
+        }
+        if (sb.length() != 0) {
+            return sb.toString();
+        } else {
+            throw new NoSuchElementException();
+        }
+    }
+
+    @Override
+    public void close() throws IOException {
+        closed = true;
         is.close();
     }
-	
 
-	private void readBuffer() throws IOException {
-		this.buffer = new char[300];
-		this.len = is.read(this.buffer);
-		while (len == 0) {
-			this.len = is.read(buffer);
-		}
-		if (this.len == -1) {
-			this.EOF = true;
-		}
-		this.pos = 0;
-	}
-		 
+
+    private void readBuffer() throws IOException {
+        if (rollback > 0) {
+            if (pos >= BUFFER_SIZE - 2) {
+                BUFFER_SIZE *= 2;
+                char[] tempBuffer = new char[BUFFER_SIZE];
+                len  = len - pos + rollback;
+                System.arraycopy(buffer, pos - rollback, tempBuffer, 0, len);
+                pos = rollback;
+                buffer = tempBuffer;
+                int prevLen = len;
+                len = 0;
+                while (len == 0) {
+                    len = is.read(buffer, prevLen, BUFFER_SIZE - prevLen);
+                }
+                len += prevLen;
+                fitSize();
+                return;
+            } else {
+                System.arraycopy(buffer, BUFFER_SIZE - rollback, buffer, 0, rollback);
+            }
+        }
+        len = 0;
+        while (len == 0) {
+            len = is.read(buffer, rollback, BUFFER_SIZE - rollback);
+        }
+        if (len == -1) {
+            EOF = true;
+        }
+        len += rollback;
+        pos = rollback;
+        fitSize();
+    }
+
+    private void fitSize(){
+        if(len + 10 < BUFFER_SIZE) {
+            int prevBuffSize = BUFFER_SIZE;
+            BUFFER_SIZE = Math.max(len + 15, 300);
+            if(prevBuffSize != BUFFER_SIZE) {
+                char[] tempBuffer = new char[BUFFER_SIZE];
+                System.arraycopy(buffer, 0, tempBuffer, 0, len);
+                buffer = tempBuffer;
+            }
+        }
+    }
 
 
     private void skipBlank() throws IOException {
-        while (true) {
-			if (hasNextChar()) {
-				char c = nextChar();
-            	if (!Character.isWhitespace(c)){
-					pos--;
-					break;
-            	} 		
-				
-			} else {
-				break;
-			}
-		}
-        
+        while (hasNextChar()) {
+            ++rollback;
+            if (!Character.isWhitespace(nextChar())) {
+                --pos;
+                --rollback;
+                break;
+            }
+        }
     }
 }
