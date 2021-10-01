@@ -9,17 +9,19 @@ public class FastScanner implements AutoCloseable {
 
     private int pos;
     private int len;
-    private final int NORMAL_BUFFER_SIZE = 300;
-    private int BUFFER_SIZE = NORMAL_BUFFER_SIZE;
-    private int foundedNextInt;
-    private int rollback = 0;
     private char[] buffer;
     private boolean EOF = false;
     private boolean closed = false;
-    private final InputStreamReader is;
+    private final Reader is;
+
+    private final int NORMAL_BUFFER_SIZE = 300;
+    private int BUFFER_SIZE = NORMAL_BUFFER_SIZE;
+    private int foundedNextInt;
+    private int rollback_count = 0;
+
 
     public FastScanner(InputStream in) {
-        is = new InputStreamReader(in, StandardCharsets.UTF_8);
+        this(in, StandardCharsets.UTF_8);
     }
 
     public FastScanner(InputStream in, Charset charset) {
@@ -92,68 +94,68 @@ public class FastScanner implements AutoCloseable {
         return hasNextIntImpl(true);
     }
 
-    private boolean hasNextIntImpl(boolean wantRollback) throws IOException {
-        skipBlank();
+    private boolean hasNextIntImpl(boolean isOnlyCheck) throws IOException {
+        skipBlank(isOnlyCheck);
         char c;
-        boolean res = true;
         int maxSymbols = 10;
         if (!hasNextChar()) {
-            res = false;
+            if (!isOnlyCheck) {
+                throw new NoSuchElementException();
+            }
+            return false;
         } else {
-            incRollback(wantRollback);
+            incRollback(isOnlyCheck);
             c = nextChar();
             StringBuilder sb = new StringBuilder();
-            if (!Character.isDigit(c)) {
-                res = false;
-            }
             if (c == '-' || c == '+') {
                 sb.append(c);
-                incRollback(wantRollback);
+                incRollback(isOnlyCheck);
                 c = nextChar();
-                res = Character.isDigit(c);
                 ++maxSymbols;
             }
+            if (!Character.isDigit(c)) {
+                rollback();
+                return false;
+            }
 
-            if (res) {
-                while (Character.isDigit(c)) {
-                    sb.append(c);
-                    if(sb.length() > maxSymbols) {
-                        res = false;
-                        break;
-                    }
-                    incRollback(wantRollback);
-                    c = nextChar();
+
+            while (Character.isDigit(c)) {
+                sb.append(c);
+                if (sb.length() > maxSymbols) {
+                    rollback();
+                    return false;
                 }
-                pos -= rollback;
-                rollback = 0;
-                if (!Character.isWhitespace(c)) {
-                    res = false;
-                } else {
+                incRollback(isOnlyCheck);
+                c = nextChar();
+            }
+
+            rollback();
+
+            if (!Character.isWhitespace(c)) {
+                return false;
+            } else {
+                if (!isOnlyCheck) {
                     try {
                         foundedNextInt = Integer.parseInt(sb.toString());
                     } catch (NumberFormatException e) {
-                        res = false;
+                        return false;
                     }
                 }
             }
         }
-        return res;
+        return true;
     }
 
     public int nextInt() throws IOException {
-        skipBlank();
-        if (!hasNextChar()) {
-            throw new NoSuchElementException();
-        }
         if (hasNextIntImpl(false)) {
             return foundedNextInt;
         }
         throw new InputMismatchException();
     }
 
-    private void incRollback(boolean wantRollback) throws IOException {
-        if (wantRollback) {
-            ++rollback;
+    private void incRollback(boolean wantToRollback) throws IOException {
+        if (wantToRollback) {
+            ++rollback_count;
             if (pos >= BUFFER_SIZE - 2) {
                 readBuffer();
             }
@@ -161,22 +163,29 @@ public class FastScanner implements AutoCloseable {
     }
 
     public boolean hasNext() throws IOException {
-        return hasNextChar();
+        skipBlank(true);
+        boolean res = hasNextChar();
+        rollback();
+        return res;
+    }
+
+    private void rollback() {
+        pos -= rollback_count;
+        rollback_count = 0;
     }
 
     public String next() throws IOException {
-        skipBlank();
+        skipBlank(false);
         StringBuilder sb = new StringBuilder();
         char c;
         while (hasNextChar()) {
             incRollback(true);
             c = nextChar();
             if (c == '\n' && sb.length() != 0) {
-                pos -= rollback;
-                rollback = 0;
+                rollback();
                 break;
             }
-            --rollback;
+            --rollback_count;
             if (c != ' ') {
                 sb.append(c);
             } else {
@@ -199,13 +208,13 @@ public class FastScanner implements AutoCloseable {
 
     //TODO::Bad complex function, need to fix
     private void readBuffer() throws IOException {
-        if (rollback > 0) {
+        if (rollback_count > 0) {
             if (pos >= BUFFER_SIZE - 2) {
                 BUFFER_SIZE *= 2;
                 char[] tempBuffer = new char[BUFFER_SIZE];
-                len  = len - pos + rollback;
-                System.arraycopy(buffer, pos - rollback, tempBuffer, 0, len);
-                pos = rollback;
+                len = len - pos + rollback_count;
+                System.arraycopy(buffer, pos - rollback_count, tempBuffer, 0, len);
+                pos = rollback_count;
                 buffer = tempBuffer;
                 int prevLen = len;
                 len = 0;
@@ -215,23 +224,23 @@ public class FastScanner implements AutoCloseable {
                 len += prevLen;
                 return;
             } else {
-                System.arraycopy(buffer, BUFFER_SIZE - rollback, buffer, 0, rollback);
+                System.arraycopy(buffer, BUFFER_SIZE - rollback_count, buffer, 0, rollback_count);
             }
         }
         len = 0;
         while (len == 0) {
-            len = is.read(buffer, rollback, BUFFER_SIZE - rollback);
+            len = is.read(buffer, rollback_count, BUFFER_SIZE - rollback_count);
         }
         if (len == -1) {
             EOF = true;
         }
-        len += rollback;
-        pos = rollback;
+        len += rollback_count;
+        pos = rollback_count;
 
-        if(len < BUFFER_SIZE / 2) {
+        if (len < BUFFER_SIZE / 2) {
             int prevBuffSize = BUFFER_SIZE;
             BUFFER_SIZE = Math.max(len, NORMAL_BUFFER_SIZE);
-            if(prevBuffSize != BUFFER_SIZE) {
+            if (prevBuffSize != BUFFER_SIZE) {
                 char[] tempBuffer = new char[BUFFER_SIZE];
                 System.arraycopy(buffer, 0, tempBuffer, 0, len);
                 buffer = tempBuffer;
@@ -240,15 +249,17 @@ public class FastScanner implements AutoCloseable {
     }
 
 
-    private void skipBlank() throws IOException {
+    private void skipBlank(boolean wantToRollback) throws IOException {
         while (hasNextChar()) {
-            ++rollback;
+            ++rollback_count;
             if (!Character.isWhitespace(nextChar())) {
                 --pos;
-                --rollback;
+                --rollback_count;
                 break;
             }
-            --rollback;
+            if (!wantToRollback) {
+                --rollback_count;
+            }
         }
     }
 }
