@@ -1,0 +1,84 @@
+
+
+
+
+[  389.148021] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/user@1000.service,task=newmem.bash,pid=3699,uid=1000
+[  389.148028] Out of memory: Killed process 3699 (newmem.bash) total-vm:499660kB, anon-rss:191084kB, file-rss:0kB, shmem-rss:0kB, UID:1000 pgtables:996kB oom_score_adj:0
+
+
+[  394.137489] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/user@1000.service,task=newmem.bash,pid=3718,uid=1000
+[  394.137495] Out of memory: Killed process 3718 (newmem.bash) total-vm:483028kB, anon-rss:180728kB, file-rss:0kB, shmem-rss:0kB, UID:1000 pgtables:972kB oom_score_adj:0
+
+
+[  404.663006] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/user@1000.service,task=newmem.bash,pid=3741,uid=1000
+[  404.663012] Out of memory: Killed process 3741 (newmem.bash) total-vm:492136kB, anon-rss:209776kB, file-rss:0kB, shmem-rss:0kB, UID:1000 pgtables:988kB oom_score_adj:0
+
+
+[  409.591029] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/user@1000.service,task=newmem.bash,pid=3765,uid=1000
+[  409.591035] Out of memory: Killed process 3765 (newmem.bash) total-vm:444748kB, anon-rss:180244kB, file-rss:0kB, shmem-rss:0kB, UID:1000 pgtables:900kB oom_score_adj:0
+
+
+[  415.125868] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/user@1000.service,task=newmem.bash,pid=3796,uid=1000
+[  415.125874] Out of memory: Killed process 3796 (newmem.bash) total-vm:432736kB, anon-rss:181164kB, file-rss:0kB, shmem-rss:0kB, UID:1000 pgtables:864kB oom_score_adj:0
+
+
+
+
+[  428.013002] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/user@1000.service,task=newmem.bash,pid=3870,uid=1000
+[  428.013008] Out of memory: Killed process 3870 (newmem.bash) total-vm:446992kB, anon-rss:221600kB, file-rss:0kB, shmem-rss:0kB, UID:1000 pgtables:892kB oom_score_adj:0
+
+
+[  434.060043] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/user@1000.service,task=newmem.bash,pid=3917,uid=1000
+[  434.060049] Out of memory: Killed process 3917 (newmem.bash) total-vm:448840kB, anon-rss:226108kB, file-rss:0kB, shmem-rss:0kB, UID:1000 pgtables:908kB oom_score_adj:0
+
+
+[  458.581441] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/user@1000.service,task=newmem.bash,pid=3964,uid=1000
+[  458.581447] Out of memory: Killed process 3964 (newmem.bash) total-vm:503752kB, anon-rss:252200kB, file-rss:0kB, shmem-rss:0kB, UID:1000 pgtables:1008kB oom_score_adj:0
+
+
+[  446.437092] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/user@1000.service,task=newmem.bash,pid=4015,uid=1000
+[  446.437098] Out of memory: Killed process 4015 (newmem.bash) total-vm:465736kB, anon-rss:243000kB, file-rss:0kB, shmem-rss:0kB, UID:1000 pgtables:924kB oom_score_adj:0
+
+
+[  453.197990] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/user@1000.service,task=newmem.bash,pid=4070,uid=1000
+[  453.197996] Out of memory: Killed process 4070 (newmem.bash) total-vm:480916kB, anon-rss:257264kB, file-rss:0kB, shmem-rss:0kB, UID:1000 pgtables:964kB oom_score_adj:0
+
+
+
+
+[  465.185967] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/user@1000.service,task=newmem.bash,pid=4235,uid=1000
+[  465.185972] Out of memory: Killed process 4235 (newmem.bash) total-vm:487780kB, anon-rss:251880kB, file-rss:0kB, shmem-rss:0kB, UID:1000 pgtables:972kB oom_score_adj:0
+
+
+
+
+
+
+[  474.205955] oom-kill:constraint=CONSTRAINT_NONE,nodemask=(null),cpuset=/,mems_allowed=0,global_oom,task_memcg=/user.slice/user-1000.slice/user@1000.service,task=newmem.bash,pid=4462,uid=1000
+[  474.205962] Out of memory: Killed process 4462 (newmem.bash) total-vm:516292kB, anon-rss:284208kB, file-rss:0kB, shmem-rss:0kB, UID:1000 pgtables:1032kB oom_score_adj:0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
