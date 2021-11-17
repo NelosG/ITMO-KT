@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>04-pig-tinder</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+
+  <body>
+    <main class="content">
+      <h1 class="title">PigTinder</h1>
+      <div class="card" id="card">
+        <picture id="picture">
+          <source
+            id="card-img-source"
+            srcset="assets/lisa.jpg 400w, assets/lisa-x2.jpg 800w"
+            type="image/jpeg"
+            sizes="100vw"
+          />
+          <img id="card-img" src="assets/lisa-x2.jpg" alt="lisa photo" class="card-photo" />
+        </picture>
+        <div class="card-info">
+          <h1 class="card-name" id="card-name">Beth,</h1>
+          <p class="card-age" id="card-age">10 months</p>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="action-button action-dislike" onclick="onAction()">
+          <svg
+            height="365pt"
+            viewBox="0 0 365.71733 365"
+            width="365pt"
+            xmlns="http://www.w3.org/2000/svg"
+            class="action-icon"
+          >
+            <g class="icon-g" fill="#f44336">
+              <path
+                d="m356.339844 296.347656-286.613282-286.613281c-12.5-12.5-32.765624-12.5-45.246093 0l-15.105469 15.082031c-12.5 12.503906-12.5 32.769532 0 45.25l286.613281 286.613282c12.503907 12.5 32.769531 12.5 45.25 0l15.082031-15.082032c12.523438-12.480468 12.523438-32.75.019532-45.25zm0 0"
+              />
+              <path
+                d="m295.988281 9.734375-286.613281 286.613281c-12.5 12.5-12.5 32.769532 0 45.25l15.082031 15.082032c12.503907 12.5 32.769531 12.5 45.25 0l286.632813-286.59375c12.503906-12.5 12.503906-32.765626 0-45.246094l-15.082032-15.082032c-12.5-12.523437-32.765624-12.523437-45.269531-.023437zm0 0"
+              />
+            </g>
+          </svg>
+        </button>
+        <button class="action-button action-star" onclick="onAction()">
+          <svg
+            height="511pt"
+            viewBox="0 -10 511.98685 511"
+            width="511pt"
+            xmlns="http://www.w3.org/2000/svg"
+            class="action-icon"
+          >
+          <g class="icon-g" fill="#ffc107">
+            <path
+              d="m510.652344 185.902344c-3.351563-10.367188-12.546875-17.730469-23.425782-18.710938l-147.773437-13.417968-58.433594-136.769532c-4.308593-10.023437-14.121093-16.511718-25.023437-16.511718s-20.714844 6.488281-25.023438 16.535156l-58.433594 136.746094-147.796874 13.417968c-10.859376 1.003906-20.03125 8.34375-23.402344 18.710938-3.371094 10.367187-.257813 21.738281 7.957031 28.90625l111.699219 97.960937-32.9375 145.089844c-2.410156 10.667969 1.730468 21.695313 10.582031 28.09375 4.757813 3.4375 10.324219 5.1875 15.9375 5.1875 4.839844 0 9.640625-1.304687 13.949219-3.882813l127.46875-76.183593 127.421875 76.183593c9.324219 5.609376 21.078125 5.097657 29.910156-1.304687 8.855469-6.417969 12.992187-17.449219 10.582031-28.09375l-32.9375-145.089844 111.699219-97.941406c8.214844-7.1875 11.351563-18.539063 7.980469-28.925781zm0 0"
+            />
+          </g>
+          </svg>
+        </button>
+        <button class="action-button action-heart" onclick="onAction()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 391.837 391.837"
+            xml:space="preserve"
+            class="action-icon"
+          >
+            <g class="icon-g" fill="#f44336">
+              <path
+                d="M285.257,35.528c58.743,0.286,106.294,47.836,106.58,106.58
+         c0,107.624-195.918,214.204-195.918,214.204S0,248.165,0,142.108c0-58.862,47.717-106.58,106.58-106.58l0,0
+         c36.032-0.281,69.718,17.842,89.339,48.065C215.674,53.517,249.273,35.441,285.257,35.528z"
+              />
+            </g>
+          </svg>
+        </button>
+      </div>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

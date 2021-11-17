@@ -1,0 +1,27 @@
+name:                hw2
+version:             0.1.0.0
+github:              "NelosG/hw2/fp-tests"
+license:             GPL-3
+author:              "Gleb Pushkarev"
+maintainer:          "gleb.pushkarev@gmail.com"
+copyright:           "2021 Gleb Pushkarev"
+
+extra-source-files:
+- README.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/NelosG/fp-tests/blob/master/hw2/README.md>
+homepage:       https://github.com/NelosG/fp-tests/blob/master/hw2/README.md
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+  dependencies: scientific

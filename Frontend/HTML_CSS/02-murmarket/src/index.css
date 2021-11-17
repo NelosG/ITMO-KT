@@ -1,0 +1,415 @@
+body {
+  position: relative;
+
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+
+.title {
+  margin: 0;
+
+  background-color: #f4f4f4;
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 32px;
+  text-align: center;
+}
+
+.header {
+  position: fixed;
+
+  top: 0;
+  z-index: 998;
+
+  width: 100%;
+
+  border-bottom: lightgray solid 1px;
+}
+
+.title::first-letter {
+  color: red;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+
+  width: 100%;
+
+  border-top: #808080 solid 1px;
+
+  background-color: #f4f4f4;
+
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+}
+
+.footer .hyperlink,
+.footer-website-link .link {
+  color: #4c4cd8;
+}
+
+.contact-info {
+  width: 100%;
+  padding: 0.4rem;
+}
+
+.contact-info a {
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.mail-image {
+  width: 1rem;
+
+  vertical-align: middle;
+}
+
+.footer-website-link {
+  text-align: right;
+}
+
+/*---------------------------------------------*/
+
+.main {
+  position: absolute;
+
+  overflow: hidden;
+
+  width: 100%;
+  height: 100%;
+}
+
+.car {
+  position: absolute;
+
+  top: 100px;
+
+  left: 0;
+
+  overflow: hidden;
+
+  width: 700%;
+  height: 65%;
+
+  margin: 0;
+  padding: 0;
+
+  transition: left 1s ease-in-out;
+
+  line-height: 100%;
+
+  text-align: left;
+
+  white-space: nowrap;
+}
+
+.but {
+  display: inline-block;
+
+  overflow: hidden;
+
+  width: 4%;
+  height: 100%;
+
+  margin: 0.2%;
+
+  transition: all 1s ease-out;
+
+  background-position: center center;
+  background-size: cover;
+}
+
+.but .label-switch,
+.but .label-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+.but .label-switch {
+  z-index: 1;
+}
+
+.car .but {
+  display: inline-block;
+
+  height: 100%;
+
+  transform: scale(0.8);
+
+  background-position: center center;
+  background-size: cover;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+.cat-name {
+  position: absolute;
+
+  top: 230px;
+  left: 0;
+
+  display: none;
+
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+
+  padding: 0;
+
+  color: white;
+
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+
+  vertical-align: middle;
+}
+
+.modalwindow {
+  position: absolute;
+
+  top: -5%;
+  left: -5%;
+
+  z-index: 100;
+
+  display: none;
+
+  width: 110%;
+  height: 110%;
+
+  margin: 0;
+
+  padding: 0;
+
+  border: 0;
+
+  background-color: rgba(0, 0, 0, 0.92);
+
+  text-align: center;
+  vertical-align: middle;
+}
+
+.modalwindow .description {
+  width: 90%;
+
+  margin: 10% 10% 0 0;
+
+  padding: 0 30px;
+
+  color: #fefefe;
+
+  text-align: left;
+  vertical-align: top;
+}
+
+.switcher {
+  display: none;
+}
+
+.modalwindow .modalname {
+  text-align: center;
+}
+
+.modalwindow .modalimg {
+  float: left;
+
+  width: 30%;
+  height: 50%;
+
+  margin: 10% 5% 0 10%;
+
+  object-fit: cover;
+}
+
+.modallabel {
+  position: absolute;
+  top: calc(5% + 70px);
+  right: calc(5% + 30px);
+
+  width: 30px;
+  height: 30px;
+
+  transform: rotate(45deg);
+}
+
+.modallabel:before {
+  position: absolute;
+
+  width: 10px;
+  height: 30px;
+
+  border-right: 10px solid white;
+
+  content: '';
+}
+
+.modallabel:after {
+  position: absolute;
+
+  width: 30px;
+  height: 10px;
+
+  border-bottom: 10px solid white;
+
+  content: '';
+}
+
+.carousel-pointer {
+  position: absolute;
+  right: 50%;
+
+  bottom: calc(100px);
+
+  z-index: 10;
+
+  width: 20px;
+  height: 20px;
+
+  border: solid grey;
+  border-radius: 15px;
+
+  background: lightgray;
+}
+
+.carousel-pointer1 {
+  transform: translate(-100px);
+}
+
+.carousel-pointer2 {
+  transform: translate(-60px);
+}
+
+.carousel-pointer3 {
+  transform: translate(-20px);
+}
+
+.carousel-pointer4 {
+  transform: translate(20px);
+}
+
+.carousel-pointer5 {
+  transform: translate(60px);
+}
+
+.carousel-pointer6 {
+  transform: translate(100px);
+}
+
+.switch-1:checked ~ .car .but1 .img,
+.switch-2:checked ~ .car .but2 .img,
+.switch-3:checked ~ .car .but3 .img,
+.switch-4:checked ~ .car .but4 .img,
+.switch-5:checked ~ .car .but5 .img,
+.switch-6:checked ~ .car .but6 .img {
+  opacity: 1;
+}
+
+.switch-1:checked ~ .car .but1:hover .img,
+.switch-2:checked ~ .car .but2:hover .img,
+.switch-3:checked ~ .car .but3:hover .img,
+.switch-4:checked ~ .car .but4:hover .img,
+.switch-5:checked ~ .car .but5:hover .img,
+.switch-6:checked ~ .car .but6:hover .img {
+  filter: brightness(40%);
+}
+
+.switch-1:checked ~ .car .but1:hover .cat-name,
+.switch-2:checked ~ .car .but2:hover .cat-name,
+.switch-3:checked ~ .car .but3:hover .cat-name,
+.switch-4:checked ~ .car .but4:hover .cat-name,
+.switch-5:checked ~ .car .but5:hover .cat-name,
+.switch-6:checked ~ .car .but6:hover .cat-name {
+  display: block;
+}
+
+.switch-1:checked ~ .car {
+  left: 35%;
+}
+
+.switch-2:checked ~ .car {
+  left: 4%;
+}
+
+.switch-3:checked ~ .car {
+  left: -27%;
+}
+
+.switch-4:checked ~ .car {
+  left: -58%;
+}
+
+.switch-5:checked ~ .car {
+  left: -89%;
+}
+
+.switch-6:checked ~ .car {
+  left: -120%;
+}
+
+.switch-1:checked ~ .car .but1 .label-modal,
+.switch-2:checked ~ .car .but2 .label-modal,
+.switch-3:checked ~ .car .but3 .label-modal,
+.switch-4:checked ~ .car .but4 .label-modal,
+.switch-5:checked ~ .car .but5 .label-modal,
+.switch-6:checked ~ .car .but6 .label-modal {
+  z-index: 2;
+}
+
+.switch-1:checked ~ .car .but1,
+.switch-2:checked ~ .car .but2,
+.switch-3:checked ~ .car .but3,
+.switch-4:checked ~ .car .but4,
+.switch-5:checked ~ .car .but5,
+.switch-6:checked ~ .car .but6 {
+  transform: scale(1);
+
+  opacity: 1;
+}
+
+.switch-1:checked ~ .carousel-pointer1,
+.switch-2:checked ~ .carousel-pointer2,
+.switch-3:checked ~ .carousel-pointer3,
+.switch-4:checked ~ .carousel-pointer4,
+.switch-5:checked ~ .carousel-pointer5,
+.switch-6:checked ~ .carousel-pointer6 {
+  width: 25px;
+  height: 25px;
+
+  border-color: #111111;
+
+  background-color: darkgray;
+}
+
+.modal-1:checked ~ .modalwindow1,
+.modal-2:checked ~ .modalwindow2,
+.modal-3:checked ~ .modalwindow3,
+.modal-4:checked ~ .modalwindow4,
+.modal-5:checked ~ .modalwindow5,
+.modal-6:checked ~ .modalwindow6 {
+  display: inline;
+}
+
+.modal-1:checked ~ .modalwindow1 .modallabel,
+.modal-2:checked ~ .modalwindow2 .modallabel,
+.modal-3:checked ~ .modalwindow3 .modallabel,
+.modal-4:checked ~ .modalwindow4 .modallabel,
+.modal-5:checked ~ .modalwindow5 .modallabel,
+.modal-6:checked ~ .modalwindow6 .modallabel {
+  display: block;
+}

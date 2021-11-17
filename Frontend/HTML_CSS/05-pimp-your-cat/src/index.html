@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>05-pimp-your-cat</title>
+    <link rel="stylesheet" href="./index.css">
+  </head>
+  <body>
+    <input class="close-button" type="checkbox" id="close">
+    <form class="cat-form">
+      <div class="content">
+        <h1 class="header">
+          Прокачай кота!
+        </h1>
+        <p class="text">
+          Подпишись на рассылку нашего тренера<br>
+          и получи индивидуальную подобранную<br>
+          программу тренировок для своего кота
+        </p>
+        <div class="cat-info">
+          Кот
+          <input class="input-age" type="number" id="age" placeholder="2">
+          <label class="age" for="age">
+            лет
+          </label>
+          и
+          <input class="input-weight" type="number" id="weight" placeholder="5">
+          <label class="weight" for="weight">
+            кг
+          </label>
+        </div>
+        <div class="program">
+          <input class="input-more" name="program" type="radio" id="pr1">
+          <label class="more" for="pr1">
+            Набор массы
+          </label>
+          <input class="input-less" name="program" type="radio" id="pr2">
+          <label class="less" for="pr2">
+            Похудение
+          </label>
+          <input class="input-idk" name="program" type="radio" id="pr3" checked>
+          <label class="idk" for="pr3">
+            Не знаю
+          </label>
+        </div>
+        <input class="input-email" type="email" id="email" placeholder="Email (ваш)"
+               required="required">
+        <label class="email-field" for="email">
+        </label>
+        <div class="want-spam">
+          <input class="input-spam" type="checkbox" id="spam">
+          <label class="spam" for="spam">
+            Хочу спам
+          </label>
+        </div>
+        <input class="submit-button" type="submit" id="submit" value="Подписаться">
+      </div>
+      <div class="photo">
+        <div class="top-rectangle"></div>
+        <img class="cat-photo" src="images/cat_photo.jpg"
+             alt="Мышь убрал, тут серьезный кот так то.">
+        <div class="bottom-rectangle"></div>
+      </div>
+      <label class="close-icon" for="close">
+      </label>
+    </form>
+  </body>
+</html>

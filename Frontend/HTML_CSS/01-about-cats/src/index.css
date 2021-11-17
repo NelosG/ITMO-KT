@@ -1,0 +1,228 @@
+body {
+  position: relative;
+
+  box-sizing: border-box;
+  min-height: 100vh;
+  margin: 0;
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+
+span.highlight_red {
+  color: red;
+}
+
+.title {
+  margin: 0;
+
+  background-color: #f4f4f4;
+  font-family: 'PT Sans Narrow', sans-serif;
+  font-size: 3rem;
+  text-align: center;
+}
+
+/* must be in main so that we can use its property, but it would be good that it was in the header by position */
+#list {
+  margin: -1.8rem 1rem;
+}
+#list ~ label {
+  margin: -2rem 2rem;
+}
+
+#list,
+#list + label {
+  position: fixed;
+
+  z-index: 999;
+
+  text-align: center;
+  vertical-align: middle;
+}
+
+.header {
+  position: fixed;
+
+  top: 0;
+  z-index: 998;
+
+  width: 100%;
+
+  border-bottom: lightgray solid 1px;
+}
+
+.cat_article {
+  margin: 1rem;
+
+  border: 1px solid;
+
+  vertical-align: top;
+}
+
+.cat_article:hover {
+  border-style: ridge groove groove ridge;
+
+  background-color: #f4f4f4;
+
+  box-shadow: 0 0.1rem 0.2rem 0.05rem grey;
+}
+
+.cat_article .cat-picture {
+  width: 19rem;
+
+  opacity: 0.9;
+}
+
+.cat_article:hover .cat-picture {
+  opacity: 1;
+}
+
+.cat_article .information .name {
+  overflow: hidden;
+
+  max-width: 18rem;
+
+  font-size: 2rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cat_article .information .category {
+  font-size: 1rem;
+}
+
+.cat_article .information .price:after,
+.cat_article .information .previous-price:after {
+  content: ' \20BD';
+}
+
+.cat_article .information .category:before {
+  color: #269aa4;
+
+  content: 'Категория: ';
+
+  opacity: 0.6;
+}
+
+.cat_article .information .name:hover,
+.cat_article .information .category span:hover {
+  color: #158993;
+}
+
+.cat_article .information .previous-price ~ .price {
+  margin: 1rem;
+
+  color: #f00;
+}
+
+.cat_article .description,
+.cat_article .small-description {
+  width: 20rem;
+
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.cat_article .description:before {
+  content: 'Полное описание:';
+}
+
+.cat_article .small-description:before {
+  content: 'Краткое описание:';
+}
+
+.cat_article .picture,
+.cat_article .information,
+.cat_article .small-description,
+.cat_article .description {
+  padding: 0.4rem;
+}
+
+.list {
+  margin: 1rem;
+}
+
+.list:checked ~ .cat_article {
+  display: block;
+
+  width: 20rem;
+  height: fit-content;
+  margin: 1rem auto;
+}
+
+.list:checked ~ .cat_article .information {
+  position: center;
+
+  width: 20rem;
+}
+
+.list:checked ~ .cat_article .small-description {
+  display: none;
+}
+
+.list:not(:checked) ~ .cat_article {
+  display: inline-block;
+
+  width: 20rem;
+  height: 35rem;
+
+  object-fit: cover;
+  text-overflow: ellipsis;
+}
+
+.list:not(:checked) ~ .cat_article .cat-picture {
+  height: 15rem;
+
+  object-fit: cover;
+}
+
+.list:not(:checked) ~ .cat_article .description {
+  display: none;
+}
+
+.cat_article .description .description-text,
+.cat_article .small-description .small-description-text {
+  font-size: 1.1rem;
+  font-weight: normal;
+}
+
+.cat_article .small-description .small-description-text {
+  overflow: hidden;
+
+  width: fit-content;
+  max-height: 3rem;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+
+  width: 100%;
+
+  padding: 0.3rem;
+
+  border-top: #808080 solid 1px;
+
+  background-color: #f4f4f4;
+
+  font-family: 'Arial', sans-serif;
+  font-size: 1rem;
+}
+
+.contact-info {
+  width: 100%;
+}
+
+.mail-image,
+.phone-image {
+  width: 1rem;
+}
+
+.phone,
+.mail {
+  margin: 1rem;
+}
+
+.previous-price {
+  color: rgba(128, 128, 128, 0.7);
+  text-decoration: line-through;
+}

@@ -1,0 +1,100 @@
+body {
+  background-color: #eee;
+}
+
+.title {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.card {
+  position: relative;
+
+  width: 400px;
+  height: 400px;
+
+  background: black;
+  margin-bottom: 20px;
+}
+
+.card-photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.card-info {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7), 0 0 10px rgba(0, 0, 0, 1);
+}
+
+.card-name,
+.card-age {
+  margin: 5px;
+}
+
+.content {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-evenly;
+
+  width: 400px;
+}
+
+.action-button {
+  width: 80px;
+  height: 80px;
+
+  border-style: none;
+  border-radius: 100px;
+
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.action-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.action-dislike:active,
+.action-heart:active {
+  background-color: red;
+}
+
+.action-dislike:active .icon-g,
+.action-star:active .icon-g,
+.action-heart:active .icon-g{
+  fill: #eee;
+}
+
+.action-star:active {
+  background-color: #ffc107;
+}
+
+@media screen and (max-width: 400px) {
+  .card {
+    width: 100vw;
+    height: 100vw;
+  }
+
+  .actions {
+    width: 100vw;
+  }
+}
