@@ -13,3 +13,7 @@
 - [Лабораторные по Линейной Алгебре на Python](https://github.com/NelosG/ITMO-KT/tree/master/LAB%20on%20Python)
 
 - [Лабораторные по С](https://github.com/NelosG/ITMO-KT/tree/master/C%20LAB)
+
+- [FP(Haskell)](https://github.com/NelosG/ITMO-KT/tree/master/FP(Haskell))
+
+- [Frontend](https://github.com/NelosG/ITMO-KT/tree/master/Frontend)
