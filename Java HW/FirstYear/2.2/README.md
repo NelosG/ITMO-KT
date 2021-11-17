@@ -1,4 +1,4 @@
-- [Array&Linked queue](https://github.com/NelosG/ITMO-KT/tree/master/Java%20HM/FirstYear/2.2/Array%26Linked%20queue)
+- [Array&Linked queue](https://github.com/NelosG/ITMO-KT/tree/master/Java%20HW/FirstYear/2.2/Array%26Linked%20queue)
 
 ## Очередь на массиве
 1. Найдите инвариант структуры данных «очередь». Определите функции, которые необходимы для реализации очереди. Найдите их пред- и постусловия, при условии что очередь не содержит null.
