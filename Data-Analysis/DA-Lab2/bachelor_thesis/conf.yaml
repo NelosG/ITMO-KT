@@ -1,0 +1,28 @@
+seed: 70
+SVC:
+  - linear
+  - poly
+  - rbf
+  - sigmoid
+MultinomialNB:
+  - 0.0
+  - 0.2
+  - 0.4
+  - 0.6
+  - 0.8
+  - 1.0
+LogisticRegression:
+  - 0.001
+  - 0.001
+  - 0.01
+  - 0.1
+  - 1
+  - 5
+  - 10
+columns:
+  - "classifier"
+  - "False positive error"
+  - "True negative error"
+  - "False negative"
+  - "True positive"
+  - "TIME"

@@ -1,0 +1,10 @@
+password:
+  password123
+
+bolt_port:
+  11002
+
+http_port:
+  11001
+
+query: "MATCH (p:Placeholder)\nRETURN p.id AS id, p.degree AS degree, p.pagerank as pagerank, p.community AS community"

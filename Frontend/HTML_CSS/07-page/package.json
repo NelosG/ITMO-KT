@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "cp -R src public",
+    "lint": "npm run lint:html && npm run lint:css",
+    "lint:html": "linthtml \"src/**/*.html\"",
+    "lint:css": "stylelint \"src/**/*.css\"",
+    "format": "prettier --write \"**/*.{js,css,json,yaml,yml,md}\""
+  },
+  "devDependencies": {
+    "@linthtml/linthtml": "0.2.7",
+    "@yandex-lms-ext/prettier-config": "1.0.2",
+    "@yandex-lms-ext/stylelint-config": "1.0.2",
+    "husky": "3.0.5",
+    "lint-staged": "9.3.0",
+    "prettier": "1.18.2",
+    "stylelint": "11.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,json,yaml,yml,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.css": [
+      "stylelint --fix",
+      "git add"
+    ]
+  }
+}

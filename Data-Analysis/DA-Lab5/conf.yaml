@@ -1,0 +1,5 @@
+year: 2021
+data:
+  user: "./data/user_data.csv"
+  nba:  "./data/nba_players.csv"
+  vk:   "./data/dataset_vk.csv"
