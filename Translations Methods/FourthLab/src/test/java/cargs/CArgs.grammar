@@ -1,0 +1,35 @@
+-> s
+
+s : Node ->  type d l next [ { new Node("S").add(type, d, l , next) } ];
+
+next : Node
+    ->  s [ {new Node("Next").add(s)} ]
+    | [ {null} ];
+
+l  : Node ->  SEMICOLON v [ { new Node("L").add(new Node(SEMICOLON), v) } ];
+
+v : Node
+    ->  l [ { new Node("V").add(l) } ]
+    | [ {null} ];
+
+d : Node ->  t k [ { new Node("D").add(t, k) } ];
+
+k : Node
+    ->  COMMA d [ { new Node("K").add(new Node(COMMA), d) } ]
+    | [ {null} ];
+
+t : Node
+    ->  STAR t [ { new Node("T").add(new Node(STAR), t) } ]
+    | var [ {new Node("T").add(var)} ];
+
+var : Node ->  NAME [ { new Node("Variable").add(new Node(NAME)) } ];
+type : Node ->  NAME  [ { new Node("Type").add(new Node(NAME)) } ];
+
+SEMICOLON -> ";";
+COMMA -> ",";
+STAR -> "*";
+
+
+NAME -> '[_$a-zA-Z][\w$]*';
+
+WS => '[ \t\n\r]';

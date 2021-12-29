@@ -1,0 +1,3 @@
+{
+  "extends": "@yandex-lms-ext/stylelint-config"
+}

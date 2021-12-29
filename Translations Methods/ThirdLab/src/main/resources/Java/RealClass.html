@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>JavaHighlight</title>
+    </head>
+    <body>
+        <p>
+            /*<br>
+            &nbsp;*&nbsp;Copyright&nbsp;(c)&nbsp;2003,&nbsp;2020,&nbsp;Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br>
+            &nbsp;*&nbsp;DO&nbsp;NOT&nbsp;ALTER&nbsp;OR&nbsp;REMOVE&nbsp;COPYRIGHT&nbsp;NOTICES&nbsp;OR&nbsp;THIS&nbsp;FILE&nbsp;HEADER.<br>
+            &nbsp;*<br>
+            &nbsp;*&nbsp;This&nbsp;code&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify&nbsp;it<br>
+            &nbsp;*&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;version&nbsp;2&nbsp;only,&nbsp;as<br>
+            &nbsp;*&nbsp;published&nbsp;by&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation.&nbsp;&nbsp;Oracle&nbsp;designates&nbsp;<span style="color:red">this</span><br>
+            &nbsp;*&nbsp;particular&nbsp;file&nbsp;as&nbsp;subject&nbsp;to&nbsp;the&nbsp;<span style="color:green">"Classpath"</span>&nbsp;exception&nbsp;as&nbsp;provided<br>
+            &nbsp;*&nbsp;by&nbsp;Oracle&nbsp;in&nbsp;the&nbsp;LICENSE&nbsp;file&nbsp;that&nbsp;accompanied&nbsp;<span style="color:red">this</span>&nbsp;code.<br>
+            &nbsp;*<br>
+            &nbsp;*&nbsp;This&nbsp;code&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,&nbsp;but&nbsp;WITHOUT<br>
+            &nbsp;*&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of&nbsp;MERCHANTABILITY&nbsp;or<br>
+            &nbsp;*&nbsp;FITNESS&nbsp;FOR&nbsp;A&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License<br>
+            &nbsp;*&nbsp;version&nbsp;2&nbsp;<span style="color:red">for</span>&nbsp;more&nbsp;details&nbsp;(a&nbsp;copy&nbsp;is&nbsp;included&nbsp;in&nbsp;the&nbsp;LICENSE&nbsp;file&nbsp;that<br>
+            &nbsp;*&nbsp;accompanied&nbsp;<span style="color:red">this</span>&nbsp;code).<br>
+            &nbsp;*<br>
+            &nbsp;*&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;version<br>
+            &nbsp;*&nbsp;2&nbsp;along&nbsp;with&nbsp;<span style="color:red">this</span>&nbsp;work;&nbsp;<span style="color:red">if</span>&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,<br>
+            &nbsp;*&nbsp;Inc.,&nbsp;51&nbsp;Franklin&nbsp;St,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.<br>
+            &nbsp;*<br>
+            &nbsp;*&nbsp;Please&nbsp;contact&nbsp;Oracle,&nbsp;500&nbsp;Oracle&nbsp;Parkway,&nbsp;Redwood&nbsp;Shores,&nbsp;CA&nbsp;94065&nbsp;USA<br>
+            &nbsp;*&nbsp;or&nbsp;visit&nbsp;www.oracle.com&nbsp;<span style="color:red">if</span>&nbsp;you&nbsp;need&nbsp;additional&nbsp;information&nbsp;or&nbsp;have&nbsp;any<br>
+            &nbsp;*&nbsp;questions.<br>
+            &nbsp;*/<br>
+            <br>
+            <span style="color:red">package</span>&nbsp;java.lang;<br>
+            <br>
+            <span style="color:red">import</span>&nbsp;jdk.internal.vm.annotation.IntrinsicCandidate;<br>
+            <br>
+            <span style="color:red">import</span>&nbsp;java.io.IOException;<br>
+            <br>
+            /**<br>
+            &nbsp;*&nbsp;A&nbsp;mutable&nbsp;sequence&nbsp;of&nbsp;characters.&nbsp;&nbsp;This&nbsp;<span style="color:red">class</span>&nbsp;provides&nbsp;an&nbsp;API&nbsp;compatible<br>
+            &nbsp;*&nbsp;with&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuffer},&nbsp;but&nbsp;with&nbsp;no&nbsp;guarantee&nbsp;of&nbsp;synchronization.<br>
+            &nbsp;*&nbsp;This&nbsp;<span style="color:red">class</span>&nbsp;is&nbsp;designed&nbsp;<span style="color:red">for</span>&nbsp;use&nbsp;as&nbsp;a&nbsp;drop-in&nbsp;replacement&nbsp;<span style="color:red">for</span><br>
+            &nbsp;*&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuffer}&nbsp;in&nbsp;places&nbsp;where&nbsp;the&nbsp;string&nbsp;buffer&nbsp;was&nbsp;being<br>
+            &nbsp;*&nbsp;used&nbsp;by&nbsp;a&nbsp;single&nbsp;thread&nbsp;(as&nbsp;is&nbsp;generally&nbsp;the&nbsp;<span style="color:red">case</span>).&nbsp;&nbsp;&nbsp;Where&nbsp;possible,<br>
+            &nbsp;*&nbsp;it&nbsp;is&nbsp;recommended&nbsp;that&nbsp;<span style="color:red">this</span>&nbsp;<span style="color:red">class</span>&nbsp;be&nbsp;used&nbsp;in&nbsp;preference&nbsp;to<br>
+            &nbsp;*&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuffer}&nbsp;as&nbsp;it&nbsp;will&nbsp;be&nbsp;faster&nbsp;under&nbsp;most&nbsp;implementations.<br>
+            &nbsp;*<br>
+            &nbsp;*&nbsp;&lt;p&gtThe&nbsp;principal&nbsp;operations&nbsp;on&nbsp;a&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuilder}&nbsp;are&nbsp;the<br>
+            &nbsp;*&nbsp;{<span style="color:yellow">@code</span>&nbsp;append}&nbsp;and&nbsp;{<span style="color:yellow">@code</span>&nbsp;insert}&nbsp;methods,&nbsp;which&nbsp;are<br>
+            &nbsp;*&nbsp;overloaded&nbsp;so&nbsp;as&nbsp;to&nbsp;accept&nbsp;data&nbsp;of&nbsp;any&nbsp;type.&nbsp;Each&nbsp;effectively<br>
+            &nbsp;*&nbsp;converts&nbsp;a&nbsp;given&nbsp;datum&nbsp;to&nbsp;a&nbsp;string&nbsp;and&nbsp;then&nbsp;appends&nbsp;or&nbsp;inserts&nbsp;the<br>
+            &nbsp;*&nbsp;characters&nbsp;of&nbsp;that&nbsp;string&nbsp;to&nbsp;the&nbsp;string&nbsp;builder.&nbsp;The<br>
+            &nbsp;*&nbsp;{<span style="color:yellow">@code</span>&nbsp;append}&nbsp;method&nbsp;always&nbsp;adds&nbsp;these&nbsp;characters&nbsp;at&nbsp;the&nbsp;end<br>
+            &nbsp;*&nbsp;of&nbsp;the&nbsp;builder;&nbsp;the&nbsp;{<span style="color:yellow">@code</span>&nbsp;insert}&nbsp;method&nbsp;adds&nbsp;the&nbsp;characters&nbsp;at<br>
+            &nbsp;*&nbsp;a&nbsp;specified&nbsp;point.<br>
+            &nbsp;*&nbsp;&lt;p&gt<br>
+            &nbsp;*&nbsp;For&nbsp;example,&nbsp;<span style="color:red">if</span>&nbsp;{<span style="color:yellow">@code</span>&nbsp;z}&nbsp;refers&nbsp;to&nbsp;a&nbsp;string&nbsp;builder&nbsp;object<br>
+            &nbsp;*&nbsp;whose&nbsp;current&nbsp;contents&nbsp;are&nbsp;<span style="color:green">"{@code&nbsp;start}"</span>,&nbsp;then<br>
+            &nbsp;*&nbsp;the&nbsp;method&nbsp;call&nbsp;{<span style="color:yellow">@code</span>&nbsp;z.append(<span style="color:green">"le"</span>)}&nbsp;would&nbsp;cause&nbsp;the&nbsp;string<br>
+            &nbsp;*&nbsp;builder&nbsp;to&nbsp;contain&nbsp;<span style="color:green">"{@code&nbsp;startle}"</span>,&nbsp;whereas<br>
+            &nbsp;*&nbsp;{<span style="color:yellow">@code</span>&nbsp;z.insert(4,&nbsp;<span style="color:green">"le"</span>)}&nbsp;would&nbsp;alter&nbsp;the&nbsp;string&nbsp;builder&nbsp;to<br>
+            &nbsp;*&nbsp;contain&nbsp;<span style="color:green">"{@code&nbsp;starlet}"</span>.<br>
+            &nbsp;*&nbsp;&lt;p&gt<br>
+            &nbsp;*&nbsp;In&nbsp;general,&nbsp;<span style="color:red">if</span>&nbsp;sb&nbsp;refers&nbsp;to&nbsp;an&nbsp;instance&nbsp;of&nbsp;a&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuilder},<br>
+            &nbsp;*&nbsp;then&nbsp;{<span style="color:yellow">@code</span>&nbsp;sb.append(x)}&nbsp;has&nbsp;the&nbsp;same&nbsp;effect&nbsp;as<br>
+            &nbsp;*&nbsp;{<span style="color:yellow">@code</span>&nbsp;sb.insert(sb.length(),&nbsp;x)}.<br>
+            &nbsp;*&nbsp;&lt;p&gt<br>
+            &nbsp;*&nbsp;Every&nbsp;string&nbsp;builder&nbsp;has&nbsp;a&nbsp;capacity.&nbsp;As&nbsp;<span style="color:red">long</span>&nbsp;as&nbsp;the&nbsp;length&nbsp;of&nbsp;the<br>
+            &nbsp;*&nbsp;character&nbsp;sequence&nbsp;contained&nbsp;in&nbsp;the&nbsp;string&nbsp;builder&nbsp;does&nbsp;not&nbsp;exceed<br>
+            &nbsp;*&nbsp;the&nbsp;capacity,&nbsp;it&nbsp;is&nbsp;not&nbsp;necessary&nbsp;to&nbsp;allocate&nbsp;a&nbsp;<span style="color:red">new</span>&nbsp;internal<br>
+            &nbsp;*&nbsp;buffer.&nbsp;If&nbsp;the&nbsp;internal&nbsp;buffer&nbsp;overflows,&nbsp;it&nbsp;is&nbsp;automatically&nbsp;made&nbsp;larger.<br>
+            &nbsp;*<br>
+            &nbsp;*&nbsp;&lt;p&gtInstances&nbsp;of&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuilder}&nbsp;are&nbsp;not&nbsp;safe&nbsp;<span style="color:red">for</span><br>
+            &nbsp;*&nbsp;use&nbsp;by&nbsp;multiple&nbsp;threads.&nbsp;If&nbsp;such&nbsp;synchronization&nbsp;is&nbsp;required&nbsp;then&nbsp;it&nbsp;is<br>
+            &nbsp;*&nbsp;recommended&nbsp;that&nbsp;{<span style="color:yellow">@link</span>&nbsp;java.lang.StringBuffer}&nbsp;be&nbsp;used.<br>
+            &nbsp;*<br>
+            &nbsp;*&nbsp;&lt;p&gtUnless&nbsp;otherwise&nbsp;noted,&nbsp;passing&nbsp;a&nbsp;{<span style="color:yellow">@code</span>&nbsp;<span style="color:red">null</span>}&nbsp;argument&nbsp;to&nbsp;a&nbsp;constructor<br>
+            &nbsp;*&nbsp;or&nbsp;method&nbsp;in&nbsp;<span style="color:red">this</span>&nbsp;<span style="color:red">class</span>&nbsp;will&nbsp;cause&nbsp;a&nbsp;{<span style="color:yellow">@link</span>&nbsp;NullPointerException}&nbsp;to&nbsp;be<br>
+            &nbsp;*&nbsp;thrown.<br>
+            &nbsp;*<br>
+            &nbsp;*&nbsp;<span style="color:yellow">@apiNote</span><br>
+            &nbsp;*&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuilder}&nbsp;<span style="color:red">implements</span>&nbsp;{<span style="color:yellow">@code</span>&nbsp;Comparable}&nbsp;but&nbsp;does&nbsp;not&nbsp;override<br>
+            &nbsp;*&nbsp;{<span style="color:yellow">@link</span>&nbsp;Object#equals&nbsp;equals}.&nbsp;Thus,&nbsp;the&nbsp;natural&nbsp;ordering&nbsp;of&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuilder}<br>
+            &nbsp;*&nbsp;is&nbsp;inconsistent&nbsp;with&nbsp;equals.&nbsp;Care&nbsp;should&nbsp;be&nbsp;exercised&nbsp;<span style="color:red">if</span>&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuilder}<br>
+            &nbsp;*&nbsp;objects&nbsp;are&nbsp;used&nbsp;as&nbsp;keys&nbsp;in&nbsp;a&nbsp;{<span style="color:yellow">@code</span>&nbsp;SortedMap}&nbsp;or&nbsp;elements&nbsp;in&nbsp;a&nbsp;{<span style="color:yellow">@code</span>&nbsp;SortedSet}.<br>
+            &nbsp;*&nbsp;See&nbsp;{<span style="color:yellow">@link</span>&nbsp;Comparable},&nbsp;{<span style="color:yellow">@link</span>&nbsp;java.util.SortedMap&nbsp;SortedMap},&nbsp;or<br>
+            &nbsp;*&nbsp;{<span style="color:yellow">@link</span>&nbsp;java.util.SortedSet&nbsp;SortedSet}&nbsp;<span style="color:red">for</span>&nbsp;more&nbsp;information.<br>
+            &nbsp;*<br>
+            &nbsp;*&nbsp;<span style="color:yellow">@author</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Michael&nbsp;McCloskey<br>
+            &nbsp;*&nbsp;<span style="color:yellow">@see</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;java.lang.StringBuffer<br>
+            &nbsp;*&nbsp;<span style="color:yellow">@see</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;java.lang.String<br>
+            &nbsp;*&nbsp;<span style="color:yellow">@since</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.5<br>
+            &nbsp;*/<br>
+            <span style="color:red">public</span>&nbsp;<span style="color:red">final</span>&nbsp;<span style="color:red">class</span>&nbsp;StringBuilder<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">extends</span>&nbsp;AbstractStringBuilder<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">implements</span>&nbsp;java.io.Serializable,&nbsp;Comparable&lt;StringBuilder&gt,&nbsp;CharSequence<br>
+            {<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**&nbsp;use&nbsp;serialVersionUID&nbsp;<span style="color:red">for</span>&nbsp;interoperability&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@java</span>.io.Serial<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">static</span>&nbsp;<span style="color:red">final</span>&nbsp;<span style="color:red">long</span>&nbsp;serialVersionUID&nbsp;=&nbsp;4383685877147921099L;<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Constructs&nbsp;a&nbsp;string&nbsp;builder&nbsp;with&nbsp;no&nbsp;characters&nbsp;in&nbsp;it&nbsp;and&nbsp;an<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;initial&nbsp;capacity&nbsp;of&nbsp;16&nbsp;characters.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@IntrinsicCandidate</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder()&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>(16);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Constructs&nbsp;a&nbsp;string&nbsp;builder&nbsp;with&nbsp;no&nbsp;characters&nbsp;in&nbsp;it&nbsp;and&nbsp;an<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;initial&nbsp;capacity&nbsp;specified&nbsp;by&nbsp;the&nbsp;{<span style="color:yellow">@code</span>&nbsp;capacity}&nbsp;argument.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@param</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;capacity&nbsp;&nbsp;the&nbsp;initial&nbsp;capacity.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NegativeArraySizeException&nbsp;&nbsp;<span style="color:red">if</span>&nbsp;the&nbsp;{<span style="color:yellow">@code</span>&nbsp;capacity}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;argument&nbsp;is&nbsp;less&nbsp;than&nbsp;{<span style="color:yellow">@code</span>&nbsp;0}.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@IntrinsicCandidate</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder(<span style="color:red">int</span>&nbsp;capacity)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>(capacity);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Constructs&nbsp;a&nbsp;string&nbsp;builder&nbsp;initialized&nbsp;to&nbsp;the&nbsp;contents&nbsp;of&nbsp;the<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;specified&nbsp;string.&nbsp;The&nbsp;initial&nbsp;capacity&nbsp;of&nbsp;the&nbsp;string&nbsp;builder&nbsp;is<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;{<span style="color:yellow">@code</span>&nbsp;16}&nbsp;plus&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;string&nbsp;argument.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@param</span>&nbsp;&nbsp;&nbsp;str&nbsp;&nbsp;&nbsp;the&nbsp;initial&nbsp;contents&nbsp;of&nbsp;the&nbsp;buffer.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@IntrinsicCandidate</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder(String&nbsp;str)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>(str);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Constructs&nbsp;a&nbsp;string&nbsp;builder&nbsp;that&nbsp;contains&nbsp;the&nbsp;same&nbsp;characters<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;as&nbsp;the&nbsp;specified&nbsp;{<span style="color:yellow">@code</span>&nbsp;CharSequence}.&nbsp;The&nbsp;initial&nbsp;capacity&nbsp;of<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;the&nbsp;string&nbsp;builder&nbsp;is&nbsp;{<span style="color:yellow">@code</span>&nbsp;16}&nbsp;plus&nbsp;the&nbsp;length&nbsp;of&nbsp;the<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;{<span style="color:yellow">@code</span>&nbsp;CharSequence}&nbsp;argument.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@param</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seq&nbsp;&nbsp;&nbsp;the&nbsp;sequence&nbsp;to&nbsp;copy.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder(CharSequence&nbsp;seq)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>(seq);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Compares&nbsp;two&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuilder}&nbsp;instances&nbsp;lexicographically.&nbsp;This&nbsp;method<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;follows&nbsp;the&nbsp;same&nbsp;rules&nbsp;<span style="color:red">for</span>&nbsp;lexicographical&nbsp;comparison&nbsp;as&nbsp;defined&nbsp;in&nbsp;the<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;{<span style="color:yellow">@linkplain</span>&nbsp;java.lang.CharSequence#compare(java.lang.CharSequence,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;java.lang.CharSequence)&nbsp;&nbsp;CharSequence.compare(<span style="color:red">this</span>,&nbsp;another)}&nbsp;method.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&lt;p&gt<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;For&nbsp;finer-grained,&nbsp;locale-sensitive&nbsp;String&nbsp;comparison,&nbsp;refer&nbsp;to<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;{<span style="color:yellow">@link</span>&nbsp;java.text.Collator}.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@param</span>&nbsp;another&nbsp;the&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuilder}&nbsp;to&nbsp;be&nbsp;compared&nbsp;with<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@return</span>&nbsp;&nbsp;the&nbsp;value&nbsp;{<span style="color:yellow">@code</span>&nbsp;0}&nbsp;<span style="color:red">if</span>&nbsp;<span style="color:red">this</span>&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuilder}&nbsp;contains&nbsp;the&nbsp;same<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;character&nbsp;sequence&nbsp;as&nbsp;that&nbsp;of&nbsp;the&nbsp;argument&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuilder};&nbsp;a&nbsp;negative&nbsp;integer<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:red">if</span>&nbsp;<span style="color:red">this</span>&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuilder}&nbsp;is&nbsp;lexicographically&nbsp;less&nbsp;than&nbsp;the<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuilder}&nbsp;argument;&nbsp;or&nbsp;a&nbsp;positive&nbsp;integer&nbsp;<span style="color:red">if</span>&nbsp;<span style="color:red">this</span>&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuilder}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;is&nbsp;lexicographically&nbsp;greater&nbsp;than&nbsp;the&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuilder}&nbsp;argument.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@since</span>&nbsp;11<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;<span style="color:red">int</span>&nbsp;compareTo(StringBuilder&nbsp;another)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">super</span>.compareTo(another);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;append(Object&nbsp;obj)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;append(String.valueOf(obj));<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@IntrinsicCandidate</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;append(String&nbsp;str)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.append(str);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Appends&nbsp;the&nbsp;specified&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuffer}&nbsp;to&nbsp;<span style="color:red">this</span>&nbsp;sequence.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&lt;p&gt<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;characters&nbsp;of&nbsp;the&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuffer}&nbsp;argument&nbsp;are&nbsp;appended,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;in&nbsp;order,&nbsp;to&nbsp;<span style="color:red">this</span>&nbsp;sequence,&nbsp;increasing&nbsp;the<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;length&nbsp;of&nbsp;<span style="color:red">this</span>&nbsp;sequence&nbsp;by&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;argument.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;{<span style="color:yellow">@code</span>&nbsp;sb}&nbsp;is&nbsp;{<span style="color:yellow">@code</span>&nbsp;<span style="color:red">null</span>},&nbsp;then&nbsp;the&nbsp;four&nbsp;characters<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;{<span style="color:yellow">@code</span>&nbsp;<span style="color:green">"null"</span>}&nbsp;are&nbsp;appended&nbsp;to&nbsp;<span style="color:red">this</span>&nbsp;sequence.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&lt;p&gt<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Let&nbsp;&lt;i&gtn&lt;/i&gt&nbsp;be&nbsp;the&nbsp;length&nbsp;of&nbsp;<span style="color:red">this</span>&nbsp;character&nbsp;sequence&nbsp;just&nbsp;prior&nbsp;to<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;execution&nbsp;of&nbsp;the&nbsp;{<span style="color:yellow">@code</span>&nbsp;append}&nbsp;method.&nbsp;Then&nbsp;the&nbsp;character&nbsp;at&nbsp;index<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&lt;i&gtk&lt;/i&gt&nbsp;in&nbsp;the&nbsp;<span style="color:red">new</span>&nbsp;character&nbsp;sequence&nbsp;is&nbsp;equal&nbsp;to&nbsp;the&nbsp;character&nbsp;at<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;index&nbsp;&lt;i&gtk&lt;/i&gt&nbsp;in&nbsp;the&nbsp;old&nbsp;character&nbsp;sequence,&nbsp;<span style="color:red">if</span>&nbsp;&lt;i&gtk&lt;/i&gt&nbsp;is&nbsp;less&nbsp;than<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&lt;i&gtn&lt;/i&gt;&nbsp;otherwise,&nbsp;it&nbsp;is&nbsp;equal&nbsp;to&nbsp;the&nbsp;character&nbsp;at&nbsp;index&nbsp;&lt;i&gtk-n&lt;/i&gt<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;in&nbsp;the&nbsp;argument&nbsp;{<span style="color:yellow">@code</span>&nbsp;sb}.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@param</span>&nbsp;&nbsp;&nbsp;sb&nbsp;&nbsp;&nbsp;the&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuffer}&nbsp;to&nbsp;append.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@return</span>&nbsp;&nbsp;a&nbsp;reference&nbsp;to&nbsp;<span style="color:red">this</span>&nbsp;object.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;append(StringBuffer&nbsp;sb)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.append(sb);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;append(CharSequence&nbsp;s)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.append(s);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;append(CharSequence&nbsp;s,&nbsp;<span style="color:red">int</span>&nbsp;start,&nbsp;<span style="color:red">int</span>&nbsp;end)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.append(s,&nbsp;start,&nbsp;end);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;append(<span style="color:red">char</span>[]&nbsp;str)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.append(str);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;IndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;append(<span style="color:red">char</span>[]&nbsp;str,&nbsp;<span style="color:red">int</span>&nbsp;offset,&nbsp;<span style="color:red">int</span>&nbsp;len)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.append(str,&nbsp;offset,&nbsp;len);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;append(<span style="color:red">boolean</span>&nbsp;b)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.append(b);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@IntrinsicCandidate</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;append(<span style="color:red">char</span>&nbsp;c)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.append(c);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@IntrinsicCandidate</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;append(<span style="color:red">int</span>&nbsp;i)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.append(i);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;append(<span style="color:red">long</span>&nbsp;lng)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.append(lng);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;append(<span style="color:red">float</span>&nbsp;f)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.append(f);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;append(<span style="color:red">double</span>&nbsp;d)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.append(d);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@since</span>&nbsp;1.5<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;appendCodePoint(<span style="color:red">int</span>&nbsp;codePoint)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.appendCodePoint(codePoint);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;StringIndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;delete(<span style="color:red">int</span>&nbsp;start,&nbsp;<span style="color:red">int</span>&nbsp;end)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.delete(start,&nbsp;end);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;StringIndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;deleteCharAt(<span style="color:red">int</span>&nbsp;index)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.deleteCharAt(index);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;StringIndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;replace(<span style="color:red">int</span>&nbsp;start,&nbsp;<span style="color:red">int</span>&nbsp;end,&nbsp;String&nbsp;str)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.replace(start,&nbsp;end,&nbsp;str);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;StringIndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;insert(<span style="color:red">int</span>&nbsp;index,&nbsp;<span style="color:red">char</span>[]&nbsp;str,&nbsp;<span style="color:red">int</span>&nbsp;offset,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">int</span>&nbsp;len)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.insert(index,&nbsp;str,&nbsp;offset,&nbsp;len);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;StringIndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;insert(<span style="color:red">int</span>&nbsp;offset,&nbsp;Object&nbsp;obj)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.insert(offset,&nbsp;obj);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;StringIndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;insert(<span style="color:red">int</span>&nbsp;offset,&nbsp;String&nbsp;str)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.insert(offset,&nbsp;str);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;StringIndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;insert(<span style="color:red">int</span>&nbsp;offset,&nbsp;<span style="color:red">char</span>[]&nbsp;str)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.insert(offset,&nbsp;str);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;IndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;insert(<span style="color:red">int</span>&nbsp;dstOffset,&nbsp;CharSequence&nbsp;s)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.insert(dstOffset,&nbsp;s);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;IndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;insert(<span style="color:red">int</span>&nbsp;dstOffset,&nbsp;CharSequence&nbsp;s,<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">int</span>&nbsp;start,&nbsp;<span style="color:red">int</span>&nbsp;end)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.insert(dstOffset,&nbsp;s,&nbsp;start,&nbsp;end);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;StringIndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;insert(<span style="color:red">int</span>&nbsp;offset,&nbsp;<span style="color:red">boolean</span>&nbsp;b)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.insert(offset,&nbsp;b);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;IndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;insert(<span style="color:red">int</span>&nbsp;offset,&nbsp;<span style="color:red">char</span>&nbsp;c)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.insert(offset,&nbsp;c);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;StringIndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;insert(<span style="color:red">int</span>&nbsp;offset,&nbsp;<span style="color:red">int</span>&nbsp;i)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.insert(offset,&nbsp;i);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;StringIndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;insert(<span style="color:red">int</span>&nbsp;offset,&nbsp;<span style="color:red">long</span>&nbsp;l)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.insert(offset,&nbsp;l);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;StringIndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;insert(<span style="color:red">int</span>&nbsp;offset,&nbsp;<span style="color:red">float</span>&nbsp;f)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.insert(offset,&nbsp;f);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;StringIndexOutOfBoundsException&nbsp;{<span style="color:yellow">@inheritDoc</span>}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;insert(<span style="color:red">int</span>&nbsp;offset,&nbsp;<span style="color:red">double</span>&nbsp;d)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.insert(offset,&nbsp;d);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;<span style="color:red">int</span>&nbsp;indexOf(String&nbsp;str)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">super</span>.indexOf(str);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;<span style="color:red">int</span>&nbsp;indexOf(String&nbsp;str,&nbsp;<span style="color:red">int</span>&nbsp;fromIndex)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">super</span>.indexOf(str,&nbsp;fromIndex);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;<span style="color:red">int</span>&nbsp;lastIndexOf(String&nbsp;str)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">super</span>.lastIndexOf(str);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;<span style="color:red">int</span>&nbsp;lastIndexOf(String&nbsp;str,&nbsp;<span style="color:red">int</span>&nbsp;fromIndex)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">super</span>.lastIndexOf(str,&nbsp;fromIndex);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;reverse()&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">super</span>.reverse();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">this</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@IntrinsicCandidate</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;String&nbsp;toString()&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;isLatin1()&nbsp;?&nbsp;StringLatin1.newString(value,&nbsp;0,&nbsp;count)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;StringUTF16.newString(value,&nbsp;0,&nbsp;count);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Save&nbsp;the&nbsp;state&nbsp;of&nbsp;the&nbsp;{<span style="color:yellow">@code</span>&nbsp;StringBuilder}&nbsp;instance&nbsp;to&nbsp;a&nbsp;stream<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;(that&nbsp;is,&nbsp;serialize&nbsp;it).<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@serialData</span>&nbsp;the&nbsp;number&nbsp;of&nbsp;characters&nbsp;currently&nbsp;stored&nbsp;in&nbsp;the&nbsp;string<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;builder&nbsp;({<span style="color:yellow">@code</span>&nbsp;<span style="color:red">int</span>}),&nbsp;followed&nbsp;by&nbsp;the&nbsp;characters&nbsp;in&nbsp;the<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;string&nbsp;builder&nbsp;({<span style="color:yellow">@code</span>&nbsp;<span style="color:red">char</span>[]}).&nbsp;&nbsp;&nbsp;The&nbsp;length&nbsp;of&nbsp;the<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:yellow">@code</span>&nbsp;<span style="color:red">char</span>}&nbsp;array&nbsp;may&nbsp;be&nbsp;greater&nbsp;than&nbsp;the&nbsp;number&nbsp;of<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;characters&nbsp;currently&nbsp;stored&nbsp;in&nbsp;the&nbsp;string&nbsp;builder,&nbsp;in&nbsp;which<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">case</span>&nbsp;extra&nbsp;characters&nbsp;are&nbsp;ignored.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@param</span>&nbsp;&nbsp;s&nbsp;the&nbsp;{<span style="color:yellow">@code</span>&nbsp;ObjectOutputStream}&nbsp;to&nbsp;which&nbsp;data&nbsp;is&nbsp;written<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;IOException&nbsp;<span style="color:red">if</span>&nbsp;an&nbsp;I/O&nbsp;error&nbsp;occurs<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@java</span>.io.Serial<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">private</span>&nbsp;<span style="color:red">void</span>&nbsp;writeObject(java.io.ObjectOutputStream&nbsp;s)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">throws</span>&nbsp;java.io.IOException&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s.defaultWriteObject();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s.writeInt(count);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">char</span>[]&nbsp;val&nbsp;=&nbsp;<span style="color:red">new</span>&nbsp;<span style="color:red">char</span>[capacity()];<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">if</span>&nbsp;(isLatin1())&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringLatin1.getChars(value,&nbsp;0,&nbsp;count,&nbsp;val,&nbsp;0);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span style="color:red">else</span>&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringUTF16.getChars(value,&nbsp;0,&nbsp;count,&nbsp;val,&nbsp;0);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s.writeObject(val);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;/**<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;readObject&nbsp;is&nbsp;called&nbsp;to&nbsp;restore&nbsp;the&nbsp;state&nbsp;of&nbsp;the&nbsp;StringBuffer&nbsp;from<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;a&nbsp;stream.<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@param</span>&nbsp;&nbsp;s&nbsp;the&nbsp;{<span style="color:yellow">@code</span>&nbsp;ObjectInputStream}&nbsp;from&nbsp;which&nbsp;data&nbsp;is&nbsp;read<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;IOException&nbsp;<span style="color:red">if</span>&nbsp;an&nbsp;I/O&nbsp;error&nbsp;occurs<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;<span style="color:yellow">@throws</span>&nbsp;ClassNotFoundException&nbsp;<span style="color:red">if</span>&nbsp;a&nbsp;serialized&nbsp;<span style="color:red">class</span>&nbsp;cannot&nbsp;be&nbsp;loaded<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*/<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@java</span>.io.Serial<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">private</span>&nbsp;<span style="color:red">void</span>&nbsp;readObject(java.io.ObjectInputStream&nbsp;s)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">throws</span>&nbsp;IOException,&nbsp;ClassNotFoundException&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s.defaultReadObject();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count&nbsp;=&nbsp;s.readInt();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">char</span>[]&nbsp;val&nbsp;=&nbsp;(<span style="color:red">char</span>[])&nbsp;s.readObject();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;initBytes(val,&nbsp;0,&nbsp;val.length);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            }<br>
+                    </p>
+    </body>
+</html>
