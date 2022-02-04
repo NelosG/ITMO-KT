@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: da2package
+Version: 0.0.4a0
+Summary: A example Python package
+Home-page: https://github.com/NelosG/da2package
+Author: Gleb Pushkarev
+Author-email: gleb.pushkarev@gmail.com
+License: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Platform: UNKNOWN
+Classifier: Development Status :: 1 - Planning
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+License-File: LICENSE
+
+# da2pack
+For DALab2
+

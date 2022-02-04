@@ -1,0 +1,45 @@
+
+-> expr
+
+expr: Double -> term exprPrime(term) [ exprPrime ];
+
+exprPrime(Double t): Double
+    -> PLUS term { Double res = t + term } exprPrime(res) [ exprPrime ]
+    | MINUS term { Double res = t - term } exprPrime(res) [ exprPrime ]
+    | [ {t} ]
+    ;
+
+term: Double -> fact termPrime(fact) [ termPrime ];
+
+termPrime(Double f): Double
+    -> MUL fact { Double res = f * fact } termPrime(res) [ termPrime ]
+    | DIV fact { Double res = f / fact } termPrime(res) [ termPrime ]
+    | [ {f} ]
+    ;
+
+
+fact: Double
+    -> LPAREN expr RPAREN [ expr ]
+    | LFPAREN expr RFPAREN [ { expr % 1.0 } ]
+    | NUMBER afterPoint(NUMBER) [ afterPoint ]
+    | MINUS fact [ { fact * -1 } ]
+    ;
+
+afterPoint(String first): Double
+    -> POINT NUMBER [ { Double.parseDouble(first + POINT + NUMBER) } ]
+    | [ `{ Double.parseDouble(first) }` ]
+    ;
+
+
+LFPAREN -> "{";
+RFPAREN -> "}";
+
+PLUS -> "+";
+MINUS -> "-";
+MUL -> "*";
+DIV -> "/";
+LPAREN -> "(";
+RPAREN -> ")";
+POINT  -> ".";
+NUMBER -> '[0-9]+';
+WS => '[ \t\n\r]';

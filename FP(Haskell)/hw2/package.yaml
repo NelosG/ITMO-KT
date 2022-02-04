@@ -1,6 +1,6 @@
 name:                hw2
 version:             0.1.0.0
-github:              "NelosG/hw2/fp-tests"
+github:              "NelosG/fp-tests"
 license:             GPL-3
 author:              "Gleb Pushkarev"
 maintainer:          "gleb.pushkarev@gmail.com"
@@ -25,3 +25,111 @@ dependencies:
 library:
   source-dirs: src
   dependencies: scientific
+
+executables:
+  hw2-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - hw2
+
+tests:
+  t1:
+    main:                Spec.hs
+    source-dirs:         test/T1
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - hw2
+    - tasty-hspec
+    - tasty-hedgehog
+    - tasty
+    - hspec
+    - hedgehog
+    - containers
+  t2:
+    main:                Spec.hs
+    source-dirs:         test/T2
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - hw2
+    - tasty-hspec
+    - tasty-hedgehog
+    - tasty
+    - hspec
+    - hedgehog
+    - containers
+  t3:
+    main:                Spec.hs
+    source-dirs:         test/T3
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - hw2
+    - tasty-hspec
+    - tasty-hedgehog
+    - tasty
+    - hspec
+    - hedgehog
+    - containers
+  t4:
+    main:                Spec.hs
+    source-dirs:         test/T4
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - hw2
+    - tasty-hspec
+    - tasty-hedgehog
+    - tasty
+    - hspec
+    - hedgehog
+    - hedgehog-classes
+    - containers
+    - with-utf8
+  t5:
+    main:                Spec.hs
+    source-dirs:         test/T5
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - hw2
+    - tasty-hspec
+    - tasty-hedgehog
+    - tasty
+    - hspec
+    - hedgehog
+    - hedgehog-classes
+    - containers
+    - with-utf8
+  t6:
+    main:                Spec.hs
+    source-dirs:         test/T6
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - hw2
+    - tasty-hspec
+    - tasty-hedgehog
+    - tasty
+    - hspec
+    - hedgehog
+    - containers
+    - mmorph

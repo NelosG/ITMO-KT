@@ -1,0 +1,10 @@
+LICENSE
+README.md
+setup.py
+src/da2package/__init__.py
+src/da2package/my_module.py
+src/da2package.egg-info/PKG-INFO
+src/da2package.egg-info/SOURCES.txt
+src/da2package.egg-info/dependency_links.txt
+src/da2package.egg-info/requires.txt
+src/da2package.egg-info/top_level.txt

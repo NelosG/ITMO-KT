@@ -6,7 +6,7 @@ module HW1.T3
   , tmember
   , tsize
   ) where
-    
+
 import Data.Foldable (Foldable (foldr'))
 
 -- | Datatype that represents tree

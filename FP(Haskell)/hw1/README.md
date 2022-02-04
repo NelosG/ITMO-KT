@@ -1,3 +1,6 @@
-# hw1
+# HW1 Tests
 
-[![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/NelosG/fp-homework/blob/master/hw1/LICENSE)
+Положите свои решения в ``src/HW1/T*.hs``. Тесты запускаются командой ``stack test hw1:t*``, где вместо ``*`` нужно написать номер тестируемого модуля, за исключением 3 и 4 тасок. Они тестируются командой ``stack test hw1:t3-4``. Все тесты запускаются командой ``stack test hw1``. Advanced тесты следует закомментировать(в файле Spec.hs), если вы не хотите их запускать.
+
+## NOTE
+Все ``data`` и ``newtype`` должы ``deriving Show``

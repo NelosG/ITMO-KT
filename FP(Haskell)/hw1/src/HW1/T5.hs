@@ -19,4 +19,3 @@ splitOn s = foldr spl ([] :| []) where
 -- | Joins value with 'NonEmpty' list.
 joinWith :: a -> NonEmpty [a] -> [a]
 joinWith s (h :| t) = h ++ foldr' (\first second -> s : (first ++ second)) [] t
-

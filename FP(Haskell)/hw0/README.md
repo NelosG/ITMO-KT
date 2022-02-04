@@ -1,3 +1,2 @@
-# hw0
-
-[![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/NelosG/fp-homework/blob/master/hw0/LICENSE)
+# HW0 Tests
+Тесты для нулевой домашки по ФП. Все тесты запускаются командой `stack test`. Если хотите потестить отдельные таски, то `stack test hw0-tests:t*`, где `*` это номер задания. T6, к сожалению, не тестируется.

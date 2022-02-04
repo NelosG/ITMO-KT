@@ -1,0 +1,722 @@
+.body {
+  min-width: 1000px;
+  margin: 0;
+
+  font-family: 'Yandex Sans Text Regular', 'Helvetica Neue', Arial, sans-serif;
+
+  font-size: 81%;
+}
+
+.body__content {
+  display: grid;
+  grid-template: 'header notification' 56px 'main  notification' 1fr / 1fr 212px;
+}
+
+.text_link {
+  transition: color 0.15s ease-out;
+
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.text_link:hover {
+  color: #cc0000;
+}
+
+.text_light-blue {
+  color: #6da2e1;
+}
+
+.text_blue {
+  color: #0054b9;
+}
+
+.text_font_size_small {
+  font-size: 81%;
+}
+
+.text_font-size_large {
+  font-size: 106%;
+}
+
+.text_font-size_huge {
+  font-size: 123%;
+}
+
+.text_inline-block {
+  display: inline-block;
+}
+
+/**HEADER**/
+.header-wrapper {
+  grid-area: header;
+
+  width: 100%;
+  height: 56px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  height: 42px;
+  padding: 0 18px 0 30px;
+}
+
+.header-wrapper__header {
+  margin: 8px auto 6px;
+}
+
+.header__item {
+  display: flex;
+  align-items: center;
+}
+
+/**GEO**/
+.geolink__button {
+  display: inline-block;
+
+  width: 19px;
+  height: 19px;
+
+  background-image: url('images/geolink.svg');
+  vertical-align: middle;
+}
+
+.geolink:hover .geolink__button {
+  background-position: 0 19px;
+}
+
+/**SETTINGS**/
+.settings__menu {
+  width: 212px;
+
+  box-shadow: 0 4px 10px 0 #d8d8d8;
+}
+
+.settings_dropdown_drop {
+  position: relative;
+}
+
+.settings__dropdown {
+  position: absolute;
+  top: 42px;
+  right: -6em;
+  z-index: 12;
+
+  display: none;
+
+  background-color: white;
+}
+
+.settings__control {
+  cursor: pointer;
+}
+
+.settings__list {
+  margin: 0;
+  padding: 10px 0 10px 10px;
+}
+
+.settings__item {
+  margin: 5px 0;
+
+  list-style-type: none;
+}
+
+.settings__label {
+  position: relative;
+
+  width: 90px;
+
+  cursor: pointer;
+  line-height: 18px;
+}
+
+.settings__label:active::after {
+  background-color: #e6e6e6;
+}
+
+.settings__label:after {
+  float: left;
+
+  box-sizing: border-box;
+
+  width: 18px;
+  height: 18px;
+  margin-right: 1rem;
+
+  border: 2px solid #0080d3;
+  border-radius: 3px;
+
+  transition: 0.15s all ease-out;
+
+  content: '';
+}
+
+.custom-checkbox {
+  position: absolute;
+  top: 2px;
+  left: -31px;
+
+  width: 12px;
+  height: 0;
+
+  stroke: #0080d3;
+  stroke-dasharray: 33;
+  stroke-width: 2px;
+}
+
+.custom-checkbox-svg {
+  display: none;
+}
+
+.text_gray {
+  color: #999;
+}
+
+.text_white {
+  color: #fff;
+}
+
+/**NOTIFICATIONS**/
+.notifications-wrapper {
+  grid-area: notification;
+
+  width: 212px;
+  height: 100%;
+  margin-top: 7px;
+  margin-bottom: 50px;
+  margin-left: auto;
+
+  background-color: transparent;
+}
+
+.notifications__item {
+  overflow: hidden;
+
+  max-height: 600px;
+  padding: 2px 2px 0 18px;
+
+  border-radius: 3px;
+
+  transition: max-height 0.3s 0.1s;
+}
+
+.notification-card {
+  position: relative;
+
+  margin: 0 10px 8px 0;
+  padding: 12px 14px;
+
+  border-radius: 3px;
+
+  transition: transform 0.15s ease-out 50ms, margin 0.1s 0.4s, visibility 0.1s 0.4s;
+
+  background: white;
+
+  box-shadow: 0 0 2px 0 #0000001a, 0 2px 6px 0 #0000001a;
+}
+
+.notification-card__header {
+  margin-bottom: 16px;
+
+  font-weight: bold;
+}
+
+.notification-card__text {
+  display: block;
+
+  margin: 10px 0;
+  padding: 0 10px;
+}
+
+.text_first-letter-colored::first-letter {
+  color: red;
+  font-weight: normal;
+}
+
+.notif__value {
+  margin-left: 5px;
+}
+
+.text_weight_bold {
+  font-weight: bold;
+}
+
+/**ROWS**/
+.rows {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  grid-area: main;
+  grid-column: 1 / 3;
+
+  transition-duration: 0.2s;
+}
+
+.rows__row-container {
+  width: 900px;
+  margin: 0 auto;
+  padding: 0 36px 0 0;
+}
+
+.row-container__row {
+  display: flex;
+  flex-direction: row;
+}
+
+/**NEWS**/
+.row-container__row_news {
+  margin-top: -4px;
+  margin-bottom: 7px;
+}
+
+.column_news {
+  flex: 100 0 auto;
+
+  max-width: 66.6%;
+  margin-bottom: 2px;
+  padding-right: 6px;
+}
+
+.news-tabs {
+  padding-top: 4px;
+}
+
+.news-tabs__tab {
+  display: inline-block;
+
+  margin-top: 0;
+  margin-right: 12px;
+  margin-bottom: 8px;
+
+  white-space: nowrap;
+}
+
+.news-tabs__date {
+  margin-bottom: 7px;
+}
+
+.news-list {
+  margin: 3px 0 0 0;
+  padding: 0;
+}
+
+.news-list__item {
+  margin-bottom: 8px;
+}
+
+/**CURRENCY**/
+.currency {
+  display: flex;
+}
+
+.currency__item {
+  margin-right: 12px;
+  margin-bottom: 9px;
+
+  letter-spacing: 1px;
+}
+
+.text_currency {
+  margin-right: 4px;
+}
+
+/**OFFER**/
+.column_offer {
+  flex: 1 1 auto;
+
+  max-width: 33.3%;
+  margin-top: 0;
+  margin-bottom: 2px;
+  padding: 0 10px 10px 20px;
+}
+
+.offer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100%;
+}
+
+.offer__image {
+  width: 120px;
+  height: 90px;
+
+  cursor: pointer;
+}
+
+.offer__title {
+  margin: 10px 0 8px 0;
+
+  font-size: 123%;
+  font-weight: 500;
+}
+.offer__description {
+  margin-top: 5px;
+}
+
+/**SEARCH**/
+.home-tabs__link {
+  margin-right: 15px;
+}
+
+.home__item {
+  margin-bottom: 10px;
+}
+
+.home__item_search {
+  position: relative;
+}
+
+.home-search__search-image {
+  position: absolute;
+  top: -35px;
+  left: -150px;
+}
+
+.search {
+  display: flex;
+
+  width: 813px;
+
+  border: 2px solid #ffdb4d;
+}
+
+.search__input-wrapper,
+.search__button-wrapper {
+  position: relative;
+}
+
+.search__image {
+  position: absolute;
+  top: 11px;
+
+  cursor: pointer;
+}
+
+.search__image_opacity_m {
+  opacity: 0.4;
+}
+
+.search__image_opacity_low {
+  opacity: 0.2;
+}
+
+.search__keyboard {
+  right: 15px;
+}
+
+.search__mic {
+  top: 6px;
+  right: 45px;
+}
+
+.search__image_opacity_low:hover {
+  opacity: 0.4;
+}
+
+.search__image_opacity_m:hover {
+  opacity: 0.6;
+}
+
+.search-input {
+  box-sizing: border-box;
+  width: 730px;
+  height: 35px;
+  padding: 0;
+
+  border: 0 solid transparent;
+  border-right-width: 75px;
+  border-left-width: 13px;
+
+  outline: none;
+}
+
+.button {
+  height: 100%;
+  padding: 0;
+
+  border: 0;
+
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button_theme_search {
+  width: 83px;
+
+  background-color: #ffdb4d;
+  outline: none;
+}
+
+.corner-sharp {
+  position: absolute;
+
+  width: 0;
+  height: 0;
+}
+
+.corner-sharp_pos_b-r {
+  right: -2px;
+  bottom: -2px;
+
+  border-bottom: 20px solid white;
+  border-left: 10px solid transparent;
+}
+
+.corner-sharp_pos_t-r {
+  top: -2px;
+  right: -2px;
+
+  border-top: 20px solid white;
+  border-left: 10px solid transparent;
+}
+
+.bgif {
+  cursor: pointer;
+}
+
+/**WIDGETS**/
+.widgets {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.widgets-column__widget {
+  width: 250px;
+  margin: 35px 0;
+}
+
+.widget_hideable {
+  display: none;
+}
+
+.widget_relative {
+  position: relative;
+}
+
+.widget__text,
+.scroll__text {
+  margin-top: 9px;
+  margin-bottom: 9px;
+
+  line-height: 1.5;
+}
+
+.widget__text_hideable {
+  display: none;
+}
+
+.m-dash {
+  padding: 0 2px;
+}
+
+.play-button_centered {
+  position: relative;
+  top: 1px;
+}
+
+.tv-header__online {
+  height: 24px;
+  margin-bottom: 2px;
+  margin-left: 10px;
+
+  border-radius: 4px;
+
+  transition: transform 0.15s ease-in-out;
+
+  background: linear-gradient(-225deg, #58c2ff 0%, #8080ff 100%);
+  line-height: 24px;
+}
+
+.tv-header__online:hover {
+  transform: scale(1.05);
+}
+
+.text_online {
+  padding: 0 8px 0 9px;
+}
+
+.widgets__movie-name {
+  margin: 0 5px;
+}
+
+.scroll-wrapper__scroll_height_m {
+  height: 280px;
+}
+
+.scroll__text_block {
+  display: block;
+}
+
+.scroll-wrapper__scroll_true {
+  overflow-y: scroll;
+
+  width: 250px;
+}
+
+.widget__scroll-wrapper {
+  overflow: hidden;
+
+  width: 232px;
+}
+
+.scroll-wrapper__scroll_transparent-gradient::before {
+  position: absolute;
+  top: 15px;
+  bottom: 0;
+
+  width: 100%;
+
+  background: linear-gradient(
+    #fff,
+    #ffffff99 5%,
+    #ffffff00 15%,
+    #ffffff00 85%,
+    #ffffff99 95%,
+    #fff
+  );
+  content: '';
+}
+
+.scroll-wrapper__scroll_transparent-gradient {
+  padding-top: 22px;
+  padding-bottom: 22px;
+}
+
+.widget__image-container {
+  position: relative;
+
+  margin: 0 5px;
+
+  vertical-align: middle;
+}
+
+.widget__image_size_s {
+  width: 23px;
+  height: 23px;
+}
+
+.widget__image_size_m {
+  width: 35px;
+  height: 35px;
+}
+
+.widget__link {
+  margin-right: 8px;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 1250px) {
+  .rows__row-container {
+    width: 780px;
+    margin-left: 50px;
+    padding-right: 156px;
+  }
+
+  .rows__row-container_home {
+    margin-left: 190px;
+  }
+
+  .search {
+    width: 683px;
+  }
+
+  .search-input {
+    width: 600px;
+  }
+}
+
+.widget-input {
+  display: none;
+}
+
+.jokes-labels__label {
+  display: none;
+
+  margin-top: 25px;
+}
+
+.services-w-inp:checked ~ .body__content .widget_services,
+.jokes-w-inp:checked ~ .body__content .widget_jokes,
+.tv-w-inp:checked ~ .body__content .widget_tv,
+.car-news-w-inp:checked ~ .body__content .widget_car-news,
+.weather-w-inp:checked ~ .body__content .widget_weather,
+.traffic-w-inp:checked ~ .body__content .traffic,
+.map-w-inp:checked ~ .body__content .widget_city-map,
+.affiche-w-inp:checked ~ .body__content .widget_affiche {
+  display: block;
+}
+
+.services-w-inp:checked ~ .body__content .widgets__column:nth-child(1),
+.jokes-w-inp:checked ~ .body__content .widgets__column:nth-child(1),
+.tv-w-inp:checked ~ .body__content .widgets__column:nth-child(2),
+.car-news-w-inp:checked ~ .body__content .widgets__column:nth-child(2) {
+  margin-right: 45px;
+}
+
+.services-w-inp:checked ~ .body__content .services-w-cb .custom-checkbox,
+.jokes-w-inp:checked ~ .body__content .jokes-w-cb .custom-checkbox,
+.tv-w-inp:checked ~ .body__content .tv-w-cb .custom-checkbox,
+.car-news-w-inp:checked ~ .body__content .car-news-w-cb .custom-checkbox,
+.weather-w-inp:checked ~ .body__content .weather-w-cb .custom-checkbox,
+.traffic-w-inp:checked ~ .body__content .traffic-w-cb .custom-checkbox,
+.map-w-inp:checked ~ .body__content .map-w-cb .custom-checkbox,
+.affiche-w-inp:checked ~ .body__content .affiche-w-cb .custom-checkbox {
+  height: 12px;
+
+  animation: draw-checkbox ease-in-out 0.2s forwards;
+}
+
+.settings-widget:checked ~ .body__content .settings__dropdown {
+  display: block;
+}
+
+.settings-widget:checked ~ .body__content .settings__control_dropdown {
+  color: #cc0000;
+}
+
+.joke-1-inp:checked ~ .joke-1,
+.joke-2-inp:checked ~ .joke-2,
+.joke-3-inp:checked ~ .joke-3,
+.joke-4-inp:checked ~ .joke-4,
+.joke-5-inp:checked ~ .joke-5 {
+  display: block;
+}
+
+.joke-1-inp:checked ~ .jokes-labels .jokes-labels__label:nth-child(2),
+.joke-2-inp:checked ~ .jokes-labels .jokes-labels__label:nth-child(3),
+.joke-3-inp:checked ~ .jokes-labels .jokes-labels__label:nth-child(4),
+.joke-4-inp:checked ~ .jokes-labels .jokes-labels__label:nth-child(5),
+.joke-5-inp:checked ~ .jokes-labels .jokes-labels__label:nth-child(1) {
+  display: block;
+}
+
+.flicker-animated {
+  animation: flicker 1s infinite;
+}
+
+@keyframes flicker {
+  from {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes draw-checkbox {
+  0% {
+    stroke-dashoffset: 33;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}

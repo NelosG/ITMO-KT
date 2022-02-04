@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>JavaHighlight</title>
+    </head>
+    <body>
+        <p>
+            <span style="color:red">import</span>&nbsp;generated.JavaHighlightBaseVisitor;<br>
+            <span style="color:red">import</span>&nbsp;generated.JavaHighlightParser;<br>
+            <span style="color:red">import</span>&nbsp;org.antlr.v4.runtime.tree.TerminalNode;<br>
+            <br>
+            <br>
+            <span style="color:red">public</span>&nbsp;<span style="color:red">class</span>&nbsp;CustomJavaVisitor&nbsp;<span style="color:red">extends</span>&nbsp;JavaHighlightBaseVisitor&lt;StringBuilder&gt&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">private</span>&nbsp;<span style="color:red">final</span>&nbsp;String&nbsp;nextLine&nbsp;=&nbsp;<span style="color:green">"&lt;br&gt"</span>&nbsp;+&nbsp;System.lineSeparator()&nbsp;/*System.lineSeparator()*/;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">private</span>&nbsp;<span style="color:red">final</span>&nbsp;String&nbsp;space&nbsp;=&nbsp;<span style="color:green">"&amp;nbsp;"</span>&nbsp;/*<span style="color:green">"&nbsp;"</span>*/;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">private</span>&nbsp;<span style="color:red">final</span>&nbsp;String&nbsp;paragraphTag&nbsp;=&nbsp;<span style="color:green">"p"</span>&nbsp;/*<span style="color:green">"pre"</span>*/;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">private</span>&nbsp;<span style="color:red">final</span>&nbsp;String&nbsp;formating&nbsp;=&nbsp;<span style="color:green">"&nbsp;"</span>.repeat(12)&nbsp;/*<span style="color:green">""</span>*/;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;visitTerminal(TerminalNode&nbsp;node)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">new</span>&nbsp;StringBuilder(node.getText());<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;visitForHighlight(JavaHighlightParser.ForHighlightContext&nbsp;ctx)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;highLight(visitChildren(ctx),&nbsp;<span style="color:green">"red"</span>);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;visitSpace(JavaHighlightParser.SpaceContext&nbsp;ctx)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">new</span>&nbsp;StringBuilder(space);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;visitNewLine(JavaHighlightParser.NewLineContext&nbsp;ctx)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">new</span>&nbsp;StringBuilder(nextLine).append(formating);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;visitTab(JavaHighlightParser.TabContext&nbsp;ctx)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">new</span>&nbsp;StringBuilder(space.repeat(4));<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;visitSpecial(JavaHighlightParser.SpecialContext&nbsp;ctx)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;res&nbsp;=&nbsp;<span style="color:red">switch</span>&nbsp;(visitChildren(ctx).toString())&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">case</span>&nbsp;<span style="color:green">"&lt;"</span>&nbsp;-&gt&nbsp;<span style="color:green">"&amp;lt;"</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">case</span>&nbsp;<span style="color:green">"&gt"</span>&nbsp;-&gt&nbsp;<span style="color:green">"&amp;gt"</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">case</span>&nbsp;<span style="color:green">"&amp;"</span>&nbsp;-&gt&nbsp;<span style="color:green">"&amp;amp;"</span>;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">default</span>&nbsp;-&gt&nbsp;<span style="color:red">throw</span>&nbsp;<span style="color:red">new</span>&nbsp;IllegalArgumentException();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">new</span>&nbsp;StringBuilder(res);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;visitProgram(JavaHighlightParser.ProgramContext&nbsp;ctx)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StringBuilder&nbsp;res&nbsp;=&nbsp;<span style="color:red">new</span>&nbsp;StringBuilder();<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;res.append(<span style="color:green">"""<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!DOCTYPE&nbsp;html&gt<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;html&nbsp;lang="en"&gt<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;head&gt<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta&nbsp;charset="UTF-8"&gt<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gtJavaHighlight&lt;/title&gt<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/head&gt<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;body&gt<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"""</span>)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append(<span style="color:green">"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;"</span>&nbsp;+&nbsp;paragraphTag&nbsp;+&nbsp;<span style="color:green">"&gt\n"</span>)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append(formating)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append(visit(ctx.children.get(0)))<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append(<span style="color:green">"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/"</span>&nbsp;+&nbsp;paragraphTag&nbsp;+&nbsp;<span style="color:green">"&gt\n"</span>)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append(<span style="color:green">"""<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/body&gt<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/html&gt<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"""</span>);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;res;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;visitStringOrCharacter(JavaHighlightParser.StringOrCharacterContext&nbsp;ctx)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;highLight(visitChildren(ctx),&nbsp;<span style="color:green">"green"</span>);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">public</span>&nbsp;StringBuilder&nbsp;visitAnnotation(JavaHighlightParser.AnnotationContext&nbsp;ctx)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;highLight(visitChildren(ctx),&nbsp;<span style="color:green">"yellow"</span>);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:yellow">@Override</span><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">protected</span>&nbsp;StringBuilder&nbsp;aggregateResult(StringBuilder&nbsp;aggregate,&nbsp;StringBuilder&nbsp;nextResult)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">if</span>(aggregate&nbsp;==&nbsp;<span style="color:red">null</span>)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;nextResult;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">if</span>(nextResult&nbsp;!=&nbsp;<span style="color:red">null</span>)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aggregate.append(nextResult);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;aggregate;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            <br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">private</span>&nbsp;StringBuilder&nbsp;highLight(StringBuilder&nbsp;sb,&nbsp;String&nbsp;color)&nbsp;{<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">return</span>&nbsp;<span style="color:red">new</span>&nbsp;StringBuilder().append(<span style="color:green">"&lt;span&nbsp;style=\"color:"</span>)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append(color)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append(<span style="color:green">"\"&gt"</span>)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append(sb)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.append(<span style="color:green">"&lt;/span&gt"</span>);<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+            }<br>
+                    </p>
+    </body>
+</html>

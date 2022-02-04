@@ -1,0 +1,141 @@
+package nelos.g;
+
+import generated.JavaHighlightVisitor;
+import org.codehaus.plexus.util.Scanner;
+
+import java.io.IOException;
+
+public class All extends CustomJavaVisitor implements JavaHighlightVisitor<StringBuilder> {
+    private static final String someString = "false2";
+    protected volatile boolean flag = true;
+    private static final String str1 = "private static final String str2;\"";
+    private static final String badOne = "\"";
+    private static final String badTwo = "<>&\"";
+    private static final String iAmSuperStar = "*\"";
+    private static final String empty = "";
+    private static final String slash = "/";
+    private static final String AHHAH = """
+                                     \"""
+                                     """;
+
+    private static final Character c = 'c';
+    private static final Character Ooooh = '"';
+    private static final Character badOne = '\'';
+    private static final Character theWorst = '\u2002';
+
+
+
+
+    public All (){
+        super();
+    }
+
+    public static void main(String[] args) throws IOException {
+        int[] ints = new int[10];
+        int i = 1 * 1;
+        int i = 1 / 1;
+        char[] chars = new char[10];
+        if (true && !false) {
+            System.out.println("true");
+        } else if (!false&&true) {
+            System.out.println("false");
+        }
+        try {
+            switch (args[1]) {
+                case "Hello" -> System.out.println("Hello");
+                case "World" -> System.out.println("World");
+                default -> throw new IOException("Wrong args");
+            }
+        } catch (IOException e) {
+            throw e;
+        } finally {
+            System.out.println("finally");
+        }
+
+        for (int i = 0; i < 100; i++) {
+            System.out.println("default");
+        }
+        while (true) {
+            System.out.println("for while");
+        }
+    }
+
+
+
+
+    private String returnNull() {
+        return null;
+    }
+
+    protected void synchron(){
+        synchronized(this) {
+            System.out.println("Nothing");
+        }
+    }
+
+    private abstract class AbstractClass {
+        abstract transient void doNothing();
+    }
+    private static final String str2 = """
+                            package Nelos.G;
+
+                            import generated.JavaHighlightVisitor;
+                            import org.codehaus.plexus.util.Scanner;
+
+                            import java.io.IOException;
+
+                            public class All extends CustomJavaVisitor implements JavaHighlightVisitor<StringBuilder> {
+                                private static final String someString = "false";
+                                protected volatile boolean flag = true;
+
+                                public All (){
+                                    super();
+                                }
+
+                                public static void main(String[] args) throws IOException {
+                                    int[] ints = new int[10];
+                                    char[] chars = new char[10];
+                                    if (true && !false) {
+                                        System.out.println("true");
+                                    } else if (!false&&true) {
+                                        System.out.println("false");
+                                    }
+                                    try {
+                                        switch (args[1]) {
+                                            case "Hello" -> System.out.println("Hello");
+                                            case "World" -> System.out.println("World");
+                                            default -> throw new IOException("Wrong args");
+                                        }
+                                    } catch (IOException e) {
+                                        throw e;
+                                    } finally {
+                                        System.out.println("finally");
+                                    }
+
+                                    for (int i = 0; i < 100; i++) {
+                                        System.out.println("default");
+                                    }
+                                    while (true) {
+                                        System.out.println("for while");
+                                    }
+                                }
+
+
+
+
+                                private String returnNull() {
+                                    return null;
+                                }
+
+                                protected void synchron(){
+                                    synchronized(this) {
+                                        System.out.println("Nothing");
+                                    }
+                                }
+
+                                private abstract class AbstractClass {
+                                    abstract transient void doNothing();
+                                }
+                            }
+                            """;
+}

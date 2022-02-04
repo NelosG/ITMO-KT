@@ -6,7 +6,7 @@ module HW1.T7
   ) where
 
 -- | Represents 'Nonempty' 'List'.
-data ListPlus a = 
+data ListPlus a =
   a :+ ListPlus a  -- ^ element and tail
   | Last a         -- ^ last element
 infixr 5 :+
@@ -16,9 +16,9 @@ instance Semigroup (ListPlus a) where
   (<>) (a :+ b) c = a :+ b <> c
 
 -- | Something like 'Either'.
-data Inclusive a b = 
-  This a 
-  | That b 
+data Inclusive a b =
+  This a
+  | That b
   | Both a b
 
 instance (Semigroup a, Semigroup b) => Semigroup (Inclusive a b) where
