@@ -3,6 +3,7 @@
 function Unary(exp) {
     this.exp = exp;
 }
+
 Unary.prototype.evaluate = function (x, y, z) {
     return this.calc(x, y, z);
 }
@@ -10,12 +11,14 @@ Unary.prototype.toString = function () {
     return this.exp.toString() + (this.char === undefined ? "" : " " + this.char);
 };
 Unary.prototype.prefix = function (x, y, z) {
-    return(this.char === undefined ? this.exp.prefix() : "(" + this.char + " " + this.exp.prefix() + ")");
+    return (this.char === undefined ? this.exp.prefix() : "(" + this.char + " " + this.exp.prefix() + ")");
 };
+
 function Uop(calc, char) {
     function Operation(first) {
         Unary.call(this, first);
     }
+
     Operation.prototype = Object.create(Unary.prototype);
     Operation.prototype.char = char;
     Operation.prototype.calc = calc;
@@ -42,6 +45,7 @@ function Bop(calc, char) {
     function Operation(first, second) {
         Binary.call(this, first, second);
     }
+
     Operation.prototype = Object.create(Binary.prototype);
     Operation.prototype.char = char;
     Operation.prototype.calc = calc;
@@ -49,20 +53,38 @@ function Bop(calc, char) {
 }
 
 const variables = ["x", "y", "z"];
-const Variable = Uop(function (...values) {return values[variables.indexOf(this.exp)]});
-const Const = Uop(function (x, y, z) {return this.exp;});
-const Negate = Uop(function (x, y, z) {return this.exp.evaluate(x, y, z) * -1;}, "negate");
-Const.prototype.prefix = function () {return this.exp.toString();}
-Variable.prototype.prefix = function () {return this.exp.toString();}
+
+const Variable = new Uop(function (...values) {
+    return values[variables.indexOf(this.exp)]
+});
+
+const Const = new Uop(function (x, y, z) {
+    return this.exp;
+});
+
+const Negate = new Uop(function (x, y, z) {
+    return this.exp.evaluate(x, y, z) * -1;
+}, "negate");
+
+Const.prototype.prefix = function () {
+    return this.exp.toString();
+}
+Variable.prototype.prefix = function () {
+    return this.exp.toString();
+}
 
 
-const ArcTan = Uop(function (x, y, z) {return Math.atan(this.exp.evaluate(x, y, z));}, "atan");
-const Exp = Uop(function (x, y, z) {return Math.exp(this.exp.evaluate(x, y, z));} , "exp");
+const ArcTan = new Uop(function (x, y, z) {
+    return Math.atan(this.exp.evaluate(x, y, z));
+}, "atan");
+const Exp = new Uop(function (x, y, z) {
+    return Math.exp(this.exp.evaluate(x, y, z));
+}, "exp");
 
-const Add = Bop((a, b) => (a + b), "+");
-const Subtract = Bop((a, b) => (a - b), "-");
-const Multiply = Bop((a, b) => (a * b), "*");
-const Divide = Bop((a, b) => (a / b), "/");
+const Add = new Bop((a, b) => (a + b), "+");
+const Subtract = new Bop((a, b) => (a - b), "-");
+const Multiply = new Bop((a, b) => (a * b), "*");
+const Divide = new Bop((a, b) => (a / b), "/");
 
 
 let quantity = new Map([
@@ -126,20 +148,18 @@ function parsePrefix(string) {
             throw new Error(args + " : " + op + " - Invalid result");
         }
         return args[0];
-    };
+    }
 
     function wrap(op, ...args) {
         if (args.length !== quantity.get(op)) {
-            if (quantity.get(op) > 1) throw new Error("Error in the number of arguments in BinOp  in \"" + pos +"\"");
+            if (quantity.get(op) > 1) throw new Error("Error in the number of arguments in BinOp  in \"" + pos + "\"");
             throw new Error("Error in the number of arguments in UnaryOp  in \"" + pos + "\"");
         }
         return new (operations.get(op))(...args);
-    };
+    }
 
     return parser(0);
-};
-
-
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -172,3 +192,6 @@ Max5.prototype.evaluate = function (x, y, z) {
 Max5.prototype.toString = function () {
     return this.first.toString() + " " + this.second.toString() + " " + this.third.toString() + " " + this.fourth.toString() + " " + this.fifth.toString() + " max5";
 }
+
+let expr = new Const(10)
+console.log(expr.evaluate(0.00000000000000000000,0.00000000000000000000,0.00000000000000000000))

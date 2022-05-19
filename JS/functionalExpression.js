@@ -15,7 +15,7 @@ const subtract = operation((first, second) => first - second);
 const multiply = operation((first, second) => first * second);
 const divide = operation((first, second) => first / second);
 const cube = operation((first) => Math.pow(first, 3));
-const cuberoot = operation((first) =>  first < 0 ? -Math.pow(-first, 1/3) : Math.pow(first, 1/3));
+const cuberoot = operation((first) => first < 0 ? -Math.pow(-first, 1 / 3) : Math.pow(first, 1 / 3));
 
 const cos = operation((first) => Math.cos(first));
 const sin = operation((first) => Math.sin(first));
