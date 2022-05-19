@@ -1,4 +1,4 @@
-# [Решение]([https://www.kgeorgiy.info/courses/java-advanced/homeworks.html](https://github.com/NelosG/ITMO-KT/tree/master/Java%20HW/SecondYear/java-advanced/java-solutions/info/kgeorgiy/ja/pushkarev))
+# [Решение](https://github.com/NelosG/ITMO-KT/tree/master/Java%20HW/SecondYear/java-advanced/java-solutions/info/kgeorgiy/ja/pushkarev)
 
 
 ## Домашнее задание 12. HelloNonblockingUDP
