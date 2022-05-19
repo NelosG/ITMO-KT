@@ -2,17 +2,17 @@
 
 - [Лабораторные по Алгоритмам и структурам данных](https://github.com/NelosG/ITMO-KT/tree/master/Algorithms)
 - [Лабораторные по дискретной математике](https://github.com/NelosG/ITMO-KT/tree/master/Discrete%20Math)
-- [Анализ данных](https://github.com/NelosG/ITMO-KT/tree/master/Data-Analysis)
-- [FP(Haskell)](https://github.com/NelosG/ITMO-KT/tree/master/FP(Haskell))
 - [Дз по Java](https://github.com/NelosG/ITMO-KT/tree/master/Java%20HW)
+- [Методы оптимизации](https://github.com/NelosG/Optimization-Methods)
 - [Многопоточное программирование](https://github.com/NelosG/ITMO-KT/tree/master/MPP)
+- [Анализ данных](https://github.com/NelosG/ITMO-KT/tree/master/Data-Analysis)
+- [FP-Haskell](https://github.com/NelosG/ITMO-KT/tree/master/FP-Haskell)
 - [Методы трансляции](https://github.com/NelosG/ITMO-KT/tree/master/Translations%20Methods)
 - [Дз по JavaScript](https://github.com/NelosG/ITMO-KT/tree/master/JS)
 - [Дз по Clojure](https://github.com/NelosG/ITMO-KT/tree/master/Clojure)
-- [Лабораторные по Линейной Алгебре на Python](https://github.com/NelosG/ITMO-KT/tree/master/LAB%20on%20Python)
+- [Лабораторные по Линейной Алгебре](https://github.com/NelosG/ITMO-KT/tree/master/LAB%20on%20Python)
 - [Лабораторные по С](https://github.com/NelosG/ITMO-KT/tree/master/C%20LAB)
 - [Frontend](https://github.com/NelosG/ITMO-KT/tree/master/Frontend)
-- [Методы оптимизации](https://github.com/NelosG/Optimization-Methods)
 
 #### C++ course
 
