@@ -6,6 +6,7 @@
 - [Методы оптимизации](https://github.com/NelosG/Optimization-Methods)
 - [Многопоточное программирование](https://github.com/NelosG/ITMO-KT/tree/master/MPP)
 - [Анализ данных](https://github.com/NelosG/ITMO-KT/tree/master/Data-Analysis)
+- [Машинное обучение](https://github.com/NelosG/ITMO-KT/tree/master/Machine%20Learning)
 - [FP-Haskell](https://github.com/NelosG/ITMO-KT/tree/master/FP-Haskell)
 - [Методы трансляции](https://github.com/NelosG/ITMO-KT/tree/master/Translations%20Methods)
 - [Дз по JavaScript](https://github.com/NelosG/ITMO-KT/tree/master/JS)

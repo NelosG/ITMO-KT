@@ -9,7 +9,7 @@ import java.util.stream.*;
 
 public class StudentDB implements AdvancedQuery {
 
-    //Comparators and collectors to avoid having to create them on every function call
+    // Comparators and collectors to avoid having to create them on every function call
     private static final Collector<Student, ?, Map<GroupName, List<Student>>> COLLECT_BY_GROUP =
             Collectors.groupingBy(Student::getGroup);
 
@@ -35,7 +35,7 @@ public class StudentDB implements AdvancedQuery {
     private static final Collector<Student, ?, List<Student>> STUDENT_TO_UNMODIFIABLE_LIST_COLLECTOR =
             Collectors.toUnmodifiableList();
 
-    // :NOTE: should be static. and in capitals // Fixed
+    // :NOTE: should be static. and in capitals // Fixed.
     private static final Comparator<Student> STUDENT_COMPARATOR = Comparator
             .comparing(Student::getLastName)
             .thenComparing(Student::getFirstName)

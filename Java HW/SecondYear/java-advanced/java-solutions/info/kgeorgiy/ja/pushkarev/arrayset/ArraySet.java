@@ -6,10 +6,8 @@ public class ArraySet<E> extends AbstractSet<E> implements NavigableSet<E> {
     private final List<E> elements;
     private final Comparator<? super E> comparator;
 
-    // :NOTE: Дублирование
     public ArraySet() {
-        this.elements = List.of();
-        this.comparator = null;
+      this((Comparator<? super E>)null);
     }
 
     public ArraySet(final Comparator<? super E> comparator) {

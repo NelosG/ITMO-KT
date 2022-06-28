@@ -48,7 +48,7 @@ public class Implementor implements JarImpler {
     private String className;
 
     /**
-     * Creates new instance of {@code Implementor}.
+     * Creates a new instance of {@code Implementor}.
      */
     public Implementor() {
     }
