@@ -1,0 +1,49 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<head>
+    <title>Task Lists</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/5.2.2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+<h3>Add Task List</h3>
+<form th:action="@{/lists/add-task-list}" method="POST" class="form">
+    <label> Name <input name="name" th:value="null"/></label>
+    <label> Description <input name="description"></label>
+    <input type="submit" value="Add" class="form-btn"/>
+</form>
+
+<h3>Tasks</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Todo</th>
+        <th>Done</th>
+        <th>Total</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${taskLists.isEmpty()}">
+        <td colspan="4">No Task Lists</td>
+    </tr>
+    <tr th:each="taskList : ${taskLists}">
+        <td class="td-name"><a th:href="@{/list(id=${taskList.getId()})}" th:text="${taskList.getName()}" class="name"> Name </a></td>
+        <td class="td-description"><span th:text="${taskList.getDescription()}" class="description"> Description </span></td>
+        <td><a th:text="${@taskService.findNotDoneTasksByListId(taskList.getId()).size()}"> Todo </a></td>
+        <td><a th:text="${@taskService.findDoneTasksByListId(taskList.getId()).size()}"> Done </a></td>
+        <td><a th:text="${@taskService.findByTaskListId(taskList.getId()).size()}"> Total </a></td>
+        <td class="td-form">
+            <form method="POST" th:action="@{/lists/delete}" class="form">
+                <input name="id" th:value="${taskList.getId()}" type="hidden"/>
+                <input type="submit" value="Delete" class="td-form-btn"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

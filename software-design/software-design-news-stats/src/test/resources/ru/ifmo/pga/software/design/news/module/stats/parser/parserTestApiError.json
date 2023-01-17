@@ -1,0 +1,20 @@
+{
+  "error": {
+    "error_code": 5,
+    "error_msg": "User authorization failed: no access_token passed.",
+    "request_params": [
+      {
+        "key": "method",
+        "value": "newsfeed.search"
+      },
+      {
+        "key": "oauth",
+        "value": "1"
+      },
+      {
+        "key": "v",
+        "value": "5.131"
+      }
+    ]
+  }
+}

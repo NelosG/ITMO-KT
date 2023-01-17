@@ -1,0 +1,55 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<head>
+    <title>Tasks</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/5.2.2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+<a th:href="@{/lists}" class="breadcrumb"> All Lists </a>
+
+<h4>Add Task</h4>
+<form th:action="@{/list/add-task}" method="POST" class="form">
+    <input name="taskListId" th:value="${param.id}" type="hidden"/>
+    <label> Name <input name="name" th:value="null"/></label>
+    <label> Description <input name="description"></label>
+    <input type="submit" value="Add" class="form-btn"/>
+</form>
+
+<h3>Tasks</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${tasks.isEmpty()}">
+        <td colspan="4">No Tasks</td>
+    </tr>
+    <tr th:each="task : ${tasks}">
+        <td class="td-name"><span th:text="${task.getName()}" class="name"> Name </span></td>
+        <td class="td-status"><span th:text="${task.getStatus()}" class="status"> Status </span></td>
+        <td class="td-description"><span th:text="${task.getDescription()}" class="description"> Description </span></td>
+        <td class="td-form">
+            <form th:action="@{/list/delete}" method="POST" class="form">
+                <input name="id" th:value="${task.getId()}" type="hidden"/>
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+        <td class="td-form">
+            <form th:action="@{/list/change-status}" method="POST" class="form">
+                <input name="id" th:value="${task.getId()}" type="hidden"/>
+                <input th:if="${task.getStatus() == TO_DO}" type="submit" value="Done" class="td-form-btn"/>
+                <input th:if="${task.getStatus() == DONE}" type="submit" value="UnDone" class="td-form-btn"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

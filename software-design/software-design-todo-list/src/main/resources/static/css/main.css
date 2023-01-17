@@ -1,0 +1,49 @@
+table, th, td, label, h3, h4 {
+    margin: 5px;
+    padding: 0.4rem;
+}
+
+table, th, td {
+    border: 1px solid;
+}
+
+h3 {
+    color: #0AA0AF;
+}
+
+h4 {
+    color: #0AA0AF;
+}
+
+.breadcrumb {
+    margin: 5px 10px;
+}
+
+.name,
+.status {
+    white-space: nowrap;
+}
+
+.form {
+    margin: 1px;
+}
+.td-form-btn {
+    width: 100%;
+}
+
+.td-name {
+    width: 10%;
+}
+
+.td-status {
+    width: 10%;
+}
+
+.td-description {
+    width: 70%;
+}
+
+.td-form {
+    padding: 0.1rem;
+    width: 10%;
+}
