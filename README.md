@@ -15,6 +15,7 @@
 - [Лабораторные по С](https://github.com/NelosG/ITMO-KT/tree/master/C%20LAB)
 - [Frontend](https://github.com/NelosG/ITMO-KT/tree/master/Frontend)
 - [Рекомендательные системы](https://github.com/NelosG/recsys-itmo-spring-2022)
+- [Software Design](https://github.com/NelosG/ITMO-KT/tree/master/software-design)
 
 #### C++ course
 
