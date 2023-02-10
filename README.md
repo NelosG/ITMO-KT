@@ -16,6 +16,8 @@
 - [Frontend](https://github.com/NelosG/ITMO-KT/tree/master/Frontend)
 - [Рекомендательные системы](https://github.com/NelosG/recsys-itmo-spring-2022)
 - [Software Design](https://github.com/NelosG/ITMO-KT/tree/master/software-design)
+- [Параллелные алгоритмы](https://github.com/NelosG/ITMO-KT/tree/master/parallel-algorithms)
+- [Базы данных](https://github.com/NelosG/ITMO-KT/tree/master/database-course)
 
 #### C++ course
 
