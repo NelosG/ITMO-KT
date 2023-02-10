@@ -16,15 +16,15 @@ class VkNewsfeedSearchResponseParser : VkResponseParser<VkNewsfeedSearchResponse
         if (!rootJsonObject.has(RESPONSE_MEMBER_NAME)) {
             throwApiException(rootJsonObject)
         }
-        val jsonObject = rootJsonObject.getAsJsonObject(RESPONSE_MEMBER_NAME)
-        checkHasMember(jsonObject, COUNT_MEMBER_NAME)
-        checkHasMember(jsonObject, TOTAL_COUNT_MEMBER_NAME)
-        val count = jsonObject.getAsJsonPrimitive(COUNT_MEMBER_NAME).asInt
-        val totalCount = jsonObject.getAsJsonPrimitive(TOTAL_COUNT_MEMBER_NAME).asLong
-        if (!jsonObject.has(NEXT_FROM_MEMBER_NAME)) {
+        val responce = rootJsonObject.getAsJsonObject(RESPONSE_MEMBER_NAME)
+        checkHasMember(responce, COUNT_MEMBER_NAME)
+        checkHasMember(responce, TOTAL_COUNT_MEMBER_NAME)
+        val count = responce.getAsJsonPrimitive(COUNT_MEMBER_NAME).asInt
+        val totalCount = responce.getAsJsonPrimitive(TOTAL_COUNT_MEMBER_NAME).asLong
+        if (!responce.has(NEXT_FROM_MEMBER_NAME)) {
             return VkNewsfeedSearchResponse(count, Optional.empty(), totalCount)
         }
-        val nextFrom = jsonObject.getAsJsonPrimitive(NEXT_FROM_MEMBER_NAME).asString
+        val nextFrom = responce.getAsJsonPrimitive(NEXT_FROM_MEMBER_NAME).asString
         return VkNewsfeedSearchResponse(count, Optional.of(nextFrom), totalCount)
     }
 

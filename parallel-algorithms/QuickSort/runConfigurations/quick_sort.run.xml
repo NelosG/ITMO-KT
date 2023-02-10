@@ -1,0 +1,14 @@
+<component name="ProjectRunConfigurationManager">
+    <configuration default="false" name="quick_sort" type="CMakeRunConfiguration" factoryName="Application"
+                   REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true"
+                   PROJECT_NAME="quick_sort" TARGET_NAME="quick_sort" CONFIG_NAME="Debug"
+                   RUN_TARGET_PROJECT_NAME="quick_sort" RUN_TARGET_NAME="quick_sort">
+        <envs>
+            <env name="OMP_THREAD_LIMIT" value="4"/>
+        </envs>
+        <method v="2">
+            <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask"
+                    enabled="true"/>
+        </method>
+    </configuration>
+</component>

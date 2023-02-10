@@ -1,0 +1,2 @@
+Solve(ContestId, Letter) :- Runs(_, SessionId, Letter, _, 1), Sessions(SessionId, _, ContestId, _).
+NoSolves(ContestId, Letter) :- Problems(ContestId, Letter, _), not Solve(ContestId, Letter).

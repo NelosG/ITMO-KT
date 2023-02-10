@@ -1,5 +1,6 @@
 package ru.ifmo.pga.software.design.aop.aspect
 
+import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.*
 import org.springframework.beans.factory.annotation.Autowired
@@ -46,5 +47,15 @@ class AspectLogRunner {
         euler.onto(joinPoint.toString(), exit - start)
         timer.add(joinPoint.toString(), exit - start)
         return result
+    }
+
+    @Before("annotatedMethod()")
+    fun beforeExec(joinPoint: JoinPoint) {
+        println("HELLO" + joinPoint.args);
+    }
+
+    @After("annotatedMethod()")
+    fun afterExec() {
+        println("GOODBYE");
     }
 }

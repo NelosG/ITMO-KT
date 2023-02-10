@@ -1,0 +1,1 @@
+pi{GroupId, CourseId} (pi{CourseId, StudentId} (sigma{Mark > 2} (Students njoin Marks)) gdiv pi{StudentId, GroupId} (Students))

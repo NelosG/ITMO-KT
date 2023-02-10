@@ -1,0 +1,6 @@
+SolvedTasks(ContestId, Letter) :-
+  Sessions(SessionId, _, ContestId, _),
+  Runs(_, SessionId, Letter, _, 1).
+NotSolvedTasks(ProblemName) :-
+  Problems(ContestId, Letter, ProblemName),
+  ¬ SolvedTasks(ContestId, Letter).

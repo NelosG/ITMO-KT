@@ -1,0 +1,1 @@
+projection{TeamId}(select{ContestId = :ContestId}(Sessions))

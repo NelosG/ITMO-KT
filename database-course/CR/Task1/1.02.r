@@ -1,0 +1,1 @@
+projection{RunId, SessionId, Letter, SubmitTime, Accepted}(select{ContestId = :ContestId && TeamId = :TeamId}(Runs njoin Sessions))

@@ -1,0 +1,8 @@
+have(StudentId) :-
+    Lecturers(LecturerId, :LecturerName),
+    Plan(GroupId, CourseId, LecturerId),
+    Students(StudentId, _, GroupId),
+    Marks(StudentId, CourseId, _).
+res(StudentId) :-
+    Students(StudentId, _, _),
+    not have(StudentId).
