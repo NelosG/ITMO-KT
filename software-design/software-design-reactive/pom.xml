@@ -10,15 +10,14 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>software-design-todo-list</artifactId>
+    <artifactId>reactive</artifactId>
     <packaging>jar</packaging>
 
-    <name>Software Design Todo List</name>
+    <name>Software Design Reactive</name>
 
     <properties>
         <bootstrap.version>5.2.3</bootstrap.version>
         <jackson.version>2.14.2</jackson.version>
-
         <!-- PLUGINS -->
         <maven-assembly-plugin.version>3.4.2</maven-assembly-plugin.version>
 
@@ -96,20 +95,19 @@
     </build>
 
     <dependencies>
-        <!-- PLUGINS -->
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->
+        <!-- https://mvnrepository.com/artifact/org.jetbrains.kotlin/kotlin-reflect -->
         <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>${maven-assembly-plugin.version}</version>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+            <version>${kotlin.version}</version>
+            <scope>runtime</scope>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
-		        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -124,12 +122,18 @@
             <version>${spring-boot.version}</version>
             <optional>true</optional>
         </dependency>
-
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb-reactive -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
+            <version>3.0.4</version>
+        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+
         <!-- Optional, for bootstrap -->
         <!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
         <dependency>
@@ -137,11 +141,14 @@
             <artifactId>bootstrap</artifactId>
             <version>${bootstrap.version}</version>
         </dependency>
-		
+        <!-- PLUGINS -->
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-assembly-plugin -->
         <dependency>
-            <groupId>ru.ifmo.pga.software.design</groupId>
-            <artifactId>core-commons</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>${maven-assembly-plugin.version}</version>
         </dependency>
+
+
     </dependencies>
 </project>

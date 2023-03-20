@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "d3abbbe9-74ef-4134-8d8b-ccbfcb728628",
+		"name": "Full Cicle",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22613345"
+	},
+	"item": [
+		{
+			"name": "registerUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/register?name=Nelos&currency=RUB",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"register"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Nelos"
+						},
+						{
+							"key": "currency",
+							"value": "RUB"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProduct1(change userId)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/add?userId=b233f72a-57cf-4694-8094-e531b0563df1&name=product1&price=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"add"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "b233f72a-57cf-4694-8094-e531b0563df1",
+							"description": "changeMe after registerUser"
+						},
+						{
+							"key": "name",
+							"value": "product1"
+						},
+						{
+							"key": "price",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProduct2(change userId)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/add?userId=b233f72a-57cf-4694-8094-e531b0563df1&name=product2&price=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"add"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "b233f72a-57cf-4694-8094-e531b0563df1",
+							"description": "changeMe after registerUser"
+						},
+						{
+							"key": "name",
+							"value": "product2"
+						},
+						{
+							"key": "price",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "allProducts(change userId)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/products/all?userId=b233f72a-57cf-4694-8094-e531b0563df1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"products",
+						"all"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "b233f72a-57cf-4694-8094-e531b0563df1",
+							"description": "changeMe after registerUser"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

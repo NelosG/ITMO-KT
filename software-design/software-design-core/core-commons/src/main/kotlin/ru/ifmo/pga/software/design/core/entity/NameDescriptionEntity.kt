@@ -18,5 +18,6 @@ abstract class NameDescriptionEntity : AbstractEntity() {
 
     companion object {
         const val NAME = "name"
+        const val DESCRIPTION = "description"
     }
 }

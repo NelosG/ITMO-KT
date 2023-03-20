@@ -1,0 +1,56 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<head>
+    <title>Companies</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/5.2.2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+<div>
+    <form class="form" method="GET" th:action="@{/}">
+        <input class="form-btn" type="submit" value="Logout"/>
+    </form>
+    <form class="form" method="GET" th:action="@{/user}">
+        <input name="id" th:value="${param.userId}" type="hidden"/>
+        <input class="form-btn" type="submit" value="Account"/>
+    </form>
+</div>
+
+<h2>Add Companies</h2>
+<form class="form" method="POST" th:action="@{/companies/add-company}">
+    <input name="userId" th:value="${param.userId}" type="hidden"/>
+    <label> Name <input name="name" th:value="null"/></label>
+    <label> Description <input name="description"></label>
+    <input class="form-btn" type="submit" value="Add"/>
+</form>
+
+<h3>Companies</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${companies.isEmpty()}">
+        <td colspan="4">No Companies</td>
+    </tr>
+    <tr th:each="company : ${companies}">
+        <td class="td-name"><a class="name"
+                               th:href="@{/company(userId=${param.userId}, id=${company.getId()})}" th:text="${company.getName()}"> Name </a></td>
+        <td class="td-description"><a class="description" th:text="${company.getDescription()}"> Description </a></td>
+        <td class="td-form">
+            <form class="form" method="POST" th:action="@{/company/delete-company}">
+                <input name="userId" th:value="${param.userId}" type="hidden"/>
+                <input name="id" th:value="${company.getId()}" type="hidden"/>
+                <input class="td-form-btn" type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

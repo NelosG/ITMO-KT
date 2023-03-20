@@ -16,7 +16,7 @@
     <name>Software Design AOP</name>
 
     <properties>
-        <aspectj.version>1.9.9.1</aspectj.version>
+        <aspectj.version>1.9.19</aspectj.version>
         <graphviz.version>0.18.1</graphviz.version>
         <aspectj-maven-plugin.version>1.14.0</aspectj-maven-plugin.version>
     </properties>

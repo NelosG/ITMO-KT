@@ -1,0 +1,57 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<head>
+    <title th:text="${stock.getName()}"></title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/5.2.2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+
+<div>
+    <form class="form" method="GET" th:action="@{/}">
+        <input class="form-btn" type="submit" value="Logout"/>
+    </form>
+    <form class="form" method="GET" th:action="@{/user}">
+        <input name="id" th:value="${param.userId}" type="hidden"/>
+        <input class="form-btn" type="submit" value="Account"/>
+    </form>
+</div>
+
+<h2 th:text="${stock.getName()}"></h2>
+
+
+<form class="form" method="POST" th:action="@{/stock/delete-stock}">
+    <input name="userId" th:value="${param.userId}" type="hidden"/>
+    <input name="id" th:value="${stock.getId()}" type="hidden"/>
+    <input class="form-btn" type="submit" value="Delete"/>
+</form>
+
+<a class="breadcrumb" th:href="@{/company(userId=${param.userId}, id=${stock.getCompanyId()})}"
+   th:text="${companyName}"></a>
+
+<h4>Price</h4>
+<a th:text="${stock.getPrice()}"></a>
+
+<h4>Buy</h4>
+<form class="form" method="POST" th:action="@{/user/buy-stock}">
+    <input name="userId" th:value="${param.userId}" type="hidden"/>
+    <input name="stockId" th:value="${param.id}" type="hidden"/>
+    <label> Count <input name="count" required type="number"></label>
+    <input class="form-btn" type="submit" value="Buy"/>
+</form>
+
+
+<div th:if="${isAdmin}">
+    <h4>Change Price</h4>
+    <form class="form" method="POST" th:action="@{/stock/change-price}">
+        <input name="userId" th:value="${param.userId}" type="hidden"/>
+        <input name="stockId" th:value="${param.id}" type="hidden"/>
+        <label> Price <input name="price" required type="number"></label>
+        <input class="form-btn" type="submit" value="Update Price"/>
+    </form>
+</div>
+
+</body>
+</html>

@@ -25,18 +25,18 @@
         <maven.compiler.target>17</maven.compiler.target>
 
         <kotlin.version>1.7.21</kotlin.version>
-        <postgresql.version>42.5.1</postgresql.version>
+        <postgresql.version>42.5.4</postgresql.version>
         <jakarta.persistence-api.version>3.1.0</jakarta.persistence-api.version>
-        <hibernate-core.version>6.1.6.Final</hibernate-core.version>
+        <hibernate-core.version>6.1.7.Final</hibernate-core.version>
         <slf4j-api.version>2.0.6</slf4j-api.version>
-        <spring-boot.version>3.0.0</spring-boot.version>
-        <spring.version>6.0.2</spring.version>
+        <spring-boot.version>3.0.4</spring-boot.version>
+        <spring.version>6.0.5</spring.version>
         <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
         <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
 
         <!-- TESTS -->
-        <junit-jupiter-engine.version>5.9.1</junit-jupiter-engine.version>
-        <mockito.version>4.8.0</mockito.version>
+        <junit-jupiter-api.version>5.9.2</junit-jupiter-api.version>
+        <mockito-kotlin.version>4.1.0</mockito-kotlin.version>
     </properties>
 
     <build>
@@ -106,25 +106,7 @@
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
-        <dependency>
-            <groupId>org.hibernate.orm</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${hibernate-core.version}</version>
-        </dependency>
 
-        <dependency>
-            <groupId>jakarta.persistence</groupId>
-            <artifactId>jakarta.persistence-api</artifactId>
-            <version>${jakarta.persistence-api.version}</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
-            <scope>runtime</scope>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-source-plugin -->
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
@@ -174,39 +156,18 @@
             <version>${spring-boot.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-test-junit5</artifactId>
-            <version>${kotlin.version}</version>
-            <scope>test</scope>
-        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit-jupiter-engine.version}</version>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit-jupiter-api.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+        <!-- https://mvnrepository.com/artifact/org.mockito.kotlin/mockito-kotlin -->
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-inline -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-inline</artifactId>
-            <version>${mockito.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-junit-jupiter</artifactId>
-            <version>${mockito.version}</version>
+            <groupId>org.mockito.kotlin</groupId>
+            <artifactId>mockito-kotlin</artifactId>
+            <version>${mockito-kotlin.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

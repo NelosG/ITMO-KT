@@ -1,0 +1,20 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<head>
+    <title>Login</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/5.2.2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+<form class="form" method="GET" th:action="@{/login/sign-in}">
+    <label> User Id <input name="userId" required type="number"></label>
+    <input class="form-btn" type="submit" value="Sign In"/>
+</form>
+
+<form class="form" method="POST" th:action="@{/login/sign-up}">
+    <input class="form-btn" type="submit" value="Sign Up"/>
+</form>
+</body>
+</html>

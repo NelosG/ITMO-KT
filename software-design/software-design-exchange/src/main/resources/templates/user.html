@@ -1,0 +1,76 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<head>
+    <title th:text="User"></title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/5.2.2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+<form class="form" method="POST" th:action="@{/login/sign-up}">
+    <input class="form-btn" type="submit" value="Create new user"/>
+</form>
+
+<form class="form" method="GET" th:action="@{/}">
+    <input class="form-btn" type="submit" value="Logout"/>
+</form>
+
+<h2>User Account</h2>
+<p>User Id: <span th:text="${user.getId()}"></span></p>
+<a class="breadcrumb" th:href="@{/companies(userId=${user.getId()})}"> All Companies </a>
+
+<h3>Wallet</h3>
+<p>Balance: <span th:text="${wallet.getAmount()}"></span></p>
+
+<h4>All money</h4>
+<p>By current price: <span th:text="${allMoney}"></span></p>
+
+<h4>Add money</h4>
+<form class="form" method="POST" th:action="@{/wallet/add-money}">
+    <input name="userId" th:value="${param.id}" type="hidden"/>
+    <input name="walletId" th:value="${wallet.getId()}" type="hidden"/>
+    <label> Amount <input name="amount" required type="number"></label>
+    <input class="td-form-btn" type="submit" value="Add"/>
+</form>
+
+
+<h3>Stocks</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Count</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${stocks.isEmpty()}">
+        <td colspan="4">No Stocks</td>
+    </tr>
+    <tr th:each="stock : ${stocks}">
+        <td class="td-name"><a class="name"
+                               th:href="@{/stock(userId=${user.getId()}, id=${stock.getId()})}"
+                               th:text="${stock.getName()}"> Name </a></td>
+        <td class="td-price"><a class="price" th:text="${stock.getPrice()}"> Price </a></td>
+        <td class="td-count"><a class="count" th:text="${stock.getCount()}"> Count </a></td>
+        <td class="td-form">
+            <form class="form" method="POST" th:action="@{/user/sell-stock}">
+                <input name="userId" th:value="${param.id}" type="hidden"/>
+                <input name="stockId" th:value="${stock.getId()}" type="hidden"/>
+                <label> Count <input name="count" required type="number"></label>
+                <input class="td-form-btn" type="submit" value="Sell"/>
+            </form>
+        </td>
+        <td class="td-form">
+            <form class="form" method="POST" th:action="@{/stock/delete-stock}">
+                <input name="userId" th:value="${param.userId}" type="hidden"/>
+                <input name="id" th:value="${stock.getId()}" type="hidden"/>
+                <input class="td-form-btn" type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

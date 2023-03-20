@@ -1,0 +1,69 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<head>
+    <title th:text="${company.getName()}"></title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/5.2.2/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body>
+
+<div>
+    <form class="form" method="GET" th:action="@{/}">
+        <input class="form-btn" type="submit" value="Logout"/>
+    </form>
+    <form class="form" method="GET" th:action="@{/user}">
+        <input name="id" th:value="${param.userId}" type="hidden"/>
+        <input class="form-btn" type="submit" value="Account"/>
+    </form>
+</div>
+
+<h2 th:text="${company.getName()}"></h2>
+
+<form class="form" method="POST" th:action="@{/company/delete-company}">
+    <input name="userId" th:value="${param.userId}" type="hidden"/>
+    <input name="id" th:value="${company.getId()}" type="hidden"/>
+    <input class="form-btn" type="submit" value="Delete"/>
+</form>
+
+<a class="breadcrumb" th:href="@{/companies(userId=${param.userId})}"> All Companies </a>
+
+<h4>Add Stock</h4>
+<form class="form" method="POST" th:action="@{/company/add-stock}">
+    <input name="userId" th:value="${param.userId}" type="hidden"/>
+    <input name="companyId" th:value="${param.id}" type="hidden"/>
+    <label> Name <input name="name" required/></label>
+    <label> Price <input name="price" required type="number"></label>
+    <input class="form-btn" type="submit" value="Add"/>
+</form>
+
+<h3>Stocks</h3>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${stocks.isEmpty()}">
+        <td colspan="4">No Stocks</td>
+    </tr>
+    <tr th:each="stock : ${stocks}">
+        <td class="td-name"><a class="name" th:href="@{/stock(userId=${param.userId}, id=${stock.getId()})}"
+                               th:text="${stock.getName()}">
+            Name </a></td>
+        <td class="td-price"><a class="price" th:text="${stock.getPrice()}"> Price </a></td>
+        <td class="td-form">
+            <form class="form" method="POST" th:action="@{/stock/delete-stock}">
+                <input name="userId" th:value="${param.userId}" type="hidden"/>
+                <input name="id" th:value="${stock.getId()}" type="hidden"/>
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
